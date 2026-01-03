@@ -158,3 +158,33 @@ a:hover { opacity: 0.92; }
   .heroSplit { grid-template-columns: 1fr; }
   .heroRight { min-height: 320px; }
 }
+.heroPoster {
+  height: 78vh;
+  min-height: 520px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-image: url("../images/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.posterOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    rgba(0,0,0,0.35),
+    rgba(0,0,0,0.35)
+  );
+}
+
+.posterTitle {
+  font-size: clamp(48px, 10vw, 140px);
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 12px 40px rgba(0,0,0,0.55);
+}
