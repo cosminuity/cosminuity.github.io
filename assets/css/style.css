@@ -158,11 +158,10 @@ a:hover { opacity: 0.92; }
   .heroSplit { grid-template-columns: 1fr; }
   .heroRight { min-height: 320px; }
 }
+
 .heroPoster {
   height: 78vh;
   min-height: 520px;
-  border-radius: var(--radius);
-  overflow: hidden;
   background-image: url("../images/hero.jpg");
   background-size: cover;
   background-position: center;
