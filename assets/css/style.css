@@ -27,13 +27,30 @@ a:hover { opacity: 0.92; }
 .container { max-width: var(--max); margin: 0 auto; padding: 28px 18px; }
 
 .nav {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 16px;
-  border: 1px solid var(--line);
-  background: rgba(18,20,27,0.65);
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 28px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,15,0.85),
+    rgba(10,10,15,0.45),
+    rgba(10,10,15,0)
+  );
+
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  border: none;
+  border-radius: 0;
 }
+
 
 .brand { font-weight: 700; letter-spacing: 0.3px; }
 .navlinks { display: flex; gap: 14px; }
@@ -163,6 +180,7 @@ a:hover { opacity: 0.92; }
 .heroPoster {
   height: 78vh;
   min-height: 520px;
+  padding-top: 96px;
   background-image: url("../images/hero.jpg");
   background-size: cover;
   background-position: center;
