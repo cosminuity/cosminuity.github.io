@@ -1,11 +1,78 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cosminuity</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <h1>Cosminuity</h1>
-  <p>GitHub Pages is live.</p>
+  <div class="container">
+    <nav class="nav">
+      <div class="brand">Cosminuity</div>
+      <div class="navlinks">
+        <a class="active" href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="kicker">Art and animation</div>
+      <div class="h1">A small universe of characters, design, and motion.</div>
+      <p class="lead">
+        This is my portfolio. Curated pieces, short clips, and concept work. Clean, fast, and focused on the work.
+      </p>
+
+      <div class="cta">
+        <a class="button primary" href="gallery.html">View Gallery <span>images and video</span></a>
+        <a class="button" href="about.html">About Me <span>story and contact</span></a>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Latest</h3>
+          <p>Spotlight your newest 3 to 6 pieces here. Keep it current.</p>
+        </div>
+        <div class="card">
+          <h3>Commission or collab</h3>
+          <p>One sentence on what you do and what you want to work on next.</p>
+        </div>
+      </div>
+
+      <div class="sectionTitle">Featured</div>
+      <div class="hr"></div>
+
+      <div class="gallery">
+        <a class="tile" href="gallery.html">
+          <div class="thumb"></div>
+          <div class="meta">
+            <p class="title">Featured Piece 1</p>
+            <p class="sub">concept art or illustration</p>
+          </div>
+        </a>
+        <a class="tile" href="gallery.html">
+          <div class="thumb"></div>
+          <div class="meta">
+            <p class="title">Featured Piece 2</p>
+            <p class="sub">animation still or clip</p>
+          </div>
+        </a>
+        <a class="tile" href="gallery.html">
+          <div class="thumb"></div>
+          <div class="meta">
+            <p class="title">Featured Piece 3</p>
+            <p class="sub">character design</p>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <div class="footer">© <span id="y"></span> Cosminuity</div>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
