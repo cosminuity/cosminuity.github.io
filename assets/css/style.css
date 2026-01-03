@@ -216,3 +216,17 @@ a:hover { opacity: 0.92; }
   z-index: 999;
 }
 
+.topbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  z-index: 9999;
+}
+
+body{
+  padding-top: 76px;
+}
