@@ -208,22 +208,23 @@ a:hover{opacity:.92}
   z-index:0;
 }
 
-/* hit area */
+/* hit area goes under the panel so the panel can be clicked */
 .sold-card--bg .sold-hit{
   position:absolute;
   inset:0;
-  z-index:3;
+  z-index:2;
 }
 
-/* bottom dock */
+/* panel sits above the hit link and receives clicks */
 .sold-card--bg .sold-panel{
   position:absolute;
   left:0;
   right:0;
   bottom:0;
-  z-index:1;
+  z-index:5;
   padding:10px 12px;
   overflow:hidden;
+  pointer-events:auto;
 }
 
 /* feathered blur */
