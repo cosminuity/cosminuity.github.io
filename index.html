@@ -8,9 +8,9 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
   
-<body>
+<body data-page="home">
 
-<<div id="siteNav"></div>
+  <div id="siteNav"></div>
 
   <header class="heroPoster">
     <div class="posterOverlay">
@@ -22,11 +22,11 @@
     <div class="footer">© <span id="y"></span> Cosminuity</div>
   </div>
 
+  <script src="assets/js/nav.js"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 
 </body>
-
 
 </html>
