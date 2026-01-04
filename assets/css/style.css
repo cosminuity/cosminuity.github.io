@@ -322,3 +322,7 @@ a:hover{opacity:.92}
   max-height:140px;
   opacity:1;
 }
+
+.sold-summary{
+  padding:4px 0;
+}
