@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Plushies Sold</title>
 
-  <link rel="icon" type="image/png" href="logo.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
@@ -29,7 +29,6 @@
       <p class="muted">Each card shows the plush, buyer, and their message.</p>
     </section>
 
-    <!-- JS will render everything inside this -->
     <section class="sold-grid" id="soldGrid" aria-label="Sold plushies gallery"></section>
   </main>
 
@@ -43,19 +42,22 @@
     document.getElementById("y").textContent = new Date().getFullYear();
 
     const soldPlushies = [
-      {
-        img: "images/plushies/plush-001.jpg",
-        plush: "Cloud Duck",
-        buyer: "Avery",
-        message: "I love it. The eyes are perfect and it sits on my desk."
-      },
-      {
-        img: "images/plushies/plush-002.jpg",
-        plush: "Name here",
-        buyer: "Buyer here",
-        message: "Message here"
-      }
-      // add the rest here
+      { img: "images/plushie/4011.png", plush: "4011", buyer: "", message: "" },
+      { img: "images/plushie/bashkim.png", plush: "Bashkim", buyer: "", message: "" },
+      { img: "images/plushie/brick.jpg", plush: "Brick", buyer: "", message: "" },
+      { img: "images/plushie/candle.jpg", plush: "Candle", buyer: "", message: "" },
+      { img: "images/plushie/critter.png", plush: "Critter", buyer: "", message: "" },
+      { img: "images/plushie/dunkin.jpg", plush: "Dunkin", buyer: "", message: "" },
+      { img: "images/plushie/hashbrown.jpg", plush: "Hashbrown", buyer: "", message: "" },
+      { img: "images/plushie/henri.jpg", plush: "Henri", buyer: "", message: "" },
+      { img: "images/plushie/lego.jpg", plush: "Lego", buyer: "", message: "" },
+      { img: "images/plushie/lostAndFound.png", plush: "Lost And Found", buyer: "", message: "" },
+      { img: "images/plushie/milf.jpg", plush: "Milf", buyer: "", message: "" },
+      { img: "images/plushie/ozzie.png", plush: "Ozzie", buyer: "", message: "" },
+      { img: "images/plushie/perry.png", plush: "Perry", buyer: "", message: "" },
+      { img: "images/plushie/popsAndLolly.png", plush: "Pops And Lolly", buyer: "", message: "" },
+      { img: "images/plushie/ramonne.jpg", plush: "Ramonne", buyer: "", message: "" },
+      { img: "images/plushie/rawrAndMindYaBuisness.png", plush: "Rawr And Mind Ya Business", buyer: "", message: "" }
     ];
 
     const grid = document.getElementById("soldGrid");
