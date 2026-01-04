@@ -201,16 +201,31 @@ a:hover{opacity:.92}
   text-overflow:ellipsis;
 }
 
-/* message hidden by default */
-.sold-message{
+/* DETAILS MESSAGE TOGGLE */
+.sold-details{
   margin-top:8px;
+}
+
+.sold-summary{
+  font-size:12px;
+  color:var(--muted);
+  cursor:pointer;
+  list-style:none;
+}
+
+.sold-summary::-webkit-details-marker{
+  display:none;
+}
+
+/* message closed */
+.sold-details .sold-message{
   max-height:0;
   opacity:0;
   overflow:hidden;
   transition:max-height .18s ease, opacity .18s ease;
 }
 
-.sold-message .sold-value{
+.sold-details .sold-message .sold-value{
   white-space:normal;
   display:-webkit-box;
   -webkit-line-clamp:3;
@@ -218,11 +233,18 @@ a:hover{opacity:.92}
   overflow:hidden;
 }
 
-/* reveal on hover or focus */
-.sold-card--bg:hover .sold-message,
-.sold-card--bg:focus-within .sold-message{
+/* message open on tap */
+.sold-details[open] .sold-message{
   max-height:140px;
   opacity:1;
+}
+
+/* desktop hover preview */
+@media (hover:hover){
+  .sold-card--bg:hover .sold-message{
+    max-height:140px;
+    opacity:1;
+  }
 }
 
 /* mobile */
@@ -230,5 +252,4 @@ a:hover{opacity:.92}
   .sold-card--bg{aspect-ratio:4/3}
   .sold-row{grid-template-columns:78px 1fr}
   .sold-card--bg .sold-panel{padding:10px}
-  .sold-message{max-height:140px;opacity:1}
 }
