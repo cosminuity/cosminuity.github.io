@@ -154,6 +154,26 @@ a:hover{opacity:.92}
   letter-spacing:.04em;
 }
 
+/* Store page hero */
+.storePage .heroPoster{
+  min-height: 50vh;
+  background-image: url("../images/store.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.storePage .posterOverlay{
+  background: linear-gradient(
+    rgba(0,0,0,.25),
+    rgba(0,0,0,.6)
+  );
+}
+
+.storePage .posterTitle{
+  font-size: clamp(40px, 7vw, 90px);
+  letter-spacing: .06em;
+}
+
 /* Gallery */
 .gallery{
   display:grid;
