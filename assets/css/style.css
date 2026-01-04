@@ -272,3 +272,22 @@ a:hover{opacity:.92}
 @media (max-width: 820px){
   .sold-sm,.sold-md,.sold-lg{grid-column:span 12}
 }
+
+@media (max-width: 600px){
+
+  /* Make cards shorter on phones */
+  .sold-card--bg{
+    min-height: 380px;
+  }
+
+  /* Pull text overlay higher */
+  .sold-card--bg .sold-body{
+    padding-top: 200px;
+    max-width: 100%;
+  }
+
+  /* Slightly reduce message height */
+  .sold-card--bg textarea.field-input{
+    min-height: 90px;
+  }
+}
