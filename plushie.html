@@ -1,1 +1,94 @@
+<!-- plushies.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plushie Gallery</title>
+
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">Cosminuity</a>
+
+      <nav class="links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a class="active" href="plushies.html">Plushies Sold</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="page-head">
+      <h1>Plushies Sold</h1>
+      <p class="muted">Each card has the plush name, buyer, and their message.</p>
+    </section>
+
+    <section class="sold-grid" aria-label="Sold plushies gallery">
+      <!-- Card 1 -->
+      <article class="sold-card">
+        <a class="sold-img" href="images/plushies/plush-001.jpg" target="_blank" rel="noopener">
+          <img src="images/plushies/plush-001.jpg" alt="Plushie photo: NAME HERE" loading="lazy" />
+        </a>
+
+        <div class="sold-body">
+          <label class="field">
+            <span class="field-label">Plushie name</span>
+            <input class="field-input" type="text" value="Cloud Duck" readonly />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Buyer name</span>
+            <input class="field-input" type="text" value="Avery" readonly />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Message</span>
+            <textarea class="field-input" rows="4" readonly>I love it. The eyes are perfect and it sits on my desk.</textarea>
+          </label>
+        </div>
+      </article>
+
+      <!-- Copy this whole <article> block per plush -->
+      <article class="sold-card">
+        <a class="sold-img" href="images/plushies/plush-002.jpg" target="_blank" rel="noopener">
+          <img src="images/plushies/plush-002.jpg" alt="Plushie photo: NAME HERE" loading="lazy" />
+        </a>
+
+        <div class="sold-body">
+          <label class="field">
+            <span class="field-label">Plushie name</span>
+            <input class="field-input" type="text" value="Name here" readonly />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Buyer name</span>
+            <input class="field-input" type="text" value="Buyer here" readonly />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Message</span>
+            <textarea class="field-input" rows="4" readonly>Message here</textarea>
+          </label>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <small class="muted">© <span id="y"></span> Cosminuity</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
