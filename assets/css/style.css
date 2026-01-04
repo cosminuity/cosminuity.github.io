@@ -245,17 +245,17 @@ a:hover{opacity:.92}
   overflow:hidden;
 }
 
-.sold-img{
-  height:220px;
-  overflow:hidden;
+.sold-img {
+  height: auto;
 }
 
-.sold-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+.sold-img img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #0b0c10;
 }
+
 
 .sold-body{
   padding:14px;
