@@ -1,47 +1,49 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Plushies Sold</title>
-
-  <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="index.html">Cosminuity</a>
-
-      <nav class="links" aria-label="Primary">
+  <nav class="nav">
+    <div class="navInner">
+      <div class="brand">Cosminuity</div>
+      <div class="navlinks">
         <a href="index.html">Home</a>
         <a href="gallery.html">Gallery</a>
         <a class="active" href="plushie.html">Plushies Sold</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="heroPoster">
+    <div class="posterOverlay">
+      <h1 class="posterTitle">PLUSHIES SOLD</h1>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="container">
     <section class="page-head">
-      <h1>Plushies Sold</h1>
+      <h1 class="pageTitle">Plushies Sold</h1>
       <p class="muted">Each card shows the plush, buyer, and their message.</p>
     </section>
 
     <section class="sold-grid" id="soldGrid" aria-label="Sold plushies gallery"></section>
   </main>
 
-  <footer class="site-footer">
-    <div class="wrap">
-      <small class="muted">© <span id="y"></span> Cosminuity</small>
-    </div>
-  </footer>
+  <div class="container">
+    <div class="footer">© <span id="y"></span> Cosminuity</div>
+  </div>
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
-        const soldPlushies = [
+    const soldPlushies = [
       { img: "assets/images/plushie/4011.png", plush: "4011", buyer: "Mikayla", message: "" },
       { img: "assets/images/plushie/bashkim.png", plush: "Bashkim", buyer: "Fahrije", message: "Meet Bashkim, which means 'Unity' in Albanian." },
       { img: "assets/images/plushie/brick.jpg", plush: "Brick", buyer: "CosminuityStudios", message: "Like all good bowls of soup- stick the landing. Forget the earth, love yourself, eat the bathtub and finally Brick is the embodiment of a mistake, and we love that." },
@@ -59,7 +61,6 @@
       { img: "assets/images/plushie/ramonne.jpg", plush: "Ramonne", buyer: "Adriana", message: "His catch phrase is 'low and slow baby' not quite sure why but his fire paint job makes him the life of the party." },
       { img: "assets/images/plushie/rawrAndMindYaBuisness.png", plush: "Rawr And Mind Ya Business", buyer: "Steph", message: "I asked my son for their names and he said MindYaBuisness." }
     ];
-
 
     const grid = document.getElementById("soldGrid");
 
