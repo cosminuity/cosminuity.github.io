@@ -8,9 +8,9 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
-<body class="plushiePage">
-  
-<div id="siteNav"></div>
+<body class="plushiePage" data-page="plushie">
+
+  <div id="siteNav"></div>
 
   <header class="heroPoster">
     <div class="posterOverlay">
@@ -31,25 +31,26 @@
     <div class="footer">© <span id="y"></span> Cosminuity</div>
   </div>
 
+  <script src="assets/js/nav.js"></script>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
     const soldPlushies = [
       { img: "assets/images/plushie/4011.png", plush: "4011", buyer: "Mikayla", message: "" },
       { img: "assets/images/plushie/bashkim.png", plush: "Bashkim", buyer: "Fahrije", message: "Meet Bashkim, which means 'Unity' in Albanian." },
-      { img: "assets/images/plushie/brick.jpg", plush: "Brick", buyer: "CosminuityStudios", message: "Like all good bowls of soup- stick the landing. Forget the earth, love yourself, eat the bathtub and finally Brick is the embodiment of a mistake, and we love that." },
+      { img: "assets/images/plushie/brick.jpg", plush: "Brick", buyer: "CosminuityStudios", message: "Like all good bowls of soup, stick the landing. Forget the earth, love yourself, eat the bathtub and finally Brick is the embodiment of a mistake, and we love that." },
       { img: "assets/images/plushie/candle.jpg", plush: "Candle", buyer: "Adriana", message: "I mean his name says it all he enjoys eating candles." },
       { img: "assets/images/plushie/critter.png", plush: "Critter", buyer: "Mikayla", message: "" },
       { img: "assets/images/plushie/dunkin.jpg", plush: "Dunkin", buyer: "Annika", message: "Chill like my iced coffee." },
       { img: "assets/images/plushie/hashbrown.jpg", plush: "Hashbrown", buyer: "Annika", message: "Hot and small like my hashbrowns." },
-      { img: "assets/images/plushie/henri.jpg", plush: "Henri", buyer: "Ben", message: "This is Henri! When he first arrived I swore he was an ordinary banana… until he bit me! His favorite activity is arson and his favorite book is Green Eggs and Ham. Watch out for him in the grocery store because he will be guarding the cheese with his life!" },
+      { img: "assets/images/plushie/henri.jpg", plush: "Henri", buyer: "Ben", message: "This is Henri. When he first arrived I swore he was an ordinary banana until he bit me. His favorite activity is arson and his favorite book is Green Eggs and Ham. Watch out for him in the grocery store because he will be guarding the cheese with his life." },
       { img: "assets/images/plushie/lego.jpg", plush: "Lego", buyer: "London", message: "Lady killer of the year, literally or metaphorically is beyond me. Dude can skate." },
       { img: "assets/images/plushie/lostAndFoind.png", plush: "Lost And Foind", buyer: "Anne", message: "" },
       { img: "assets/images/plushie/milf.jpg", plush: "Milf", buyer: "Jaycob", message: "Named after what we like." },
       { img: "assets/images/plushie/ozzie.png", plush: "Ozzie", buyer: "London", message: "Certified passenger princess. Feral for the feet." },
       { img: "assets/images/plushie/perry.png", plush: "Perry", buyer: "JJ", message: "" },
       { img: "assets/images/plushie/popsAndLolly.png", plush: "Pops And Lolly", buyer: "Violet", message: "You're just gonna have to live with the name pops." },
-      { img: "assets/images/plushie/ramonne.jpg", plush: "Ramonne", buyer: "Adriana", message: "His catch phrase is 'low and slow baby' not quite sure why but his fire paint job makes him the life of the party." },
+      { img: "assets/images/plushie/ramonne.jpg", plush: "Ramonne", buyer: "Adriana", message: "His catch phrase is low and slow baby. Not quite sure why but his fire paint job makes him the life of the party." },
       { img: "assets/images/plushie/rawrAndMindYaBuisness.png", plush: "Rawr And Mind Ya Business", buyer: "Steph", message: "I asked my son for their names and he said MindYaBuisness." }
     ];
 
@@ -80,5 +81,7 @@
       </article>
     `).join("");
   </script>
+
 </body>
+
 </html>
