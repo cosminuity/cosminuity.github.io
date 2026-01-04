@@ -258,7 +258,7 @@ a:hover{opacity:.92}
 .sold-card--bg .sold-body{
   align-self: end;
   padding: 22px;
-  padding-top: 260px; /* increase to push text lower */
+  padding-top: 340px; /* increase to push text lower */
   max-width: 740px;
 }
 
