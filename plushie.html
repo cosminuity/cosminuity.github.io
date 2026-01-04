@@ -66,28 +66,32 @@
 
   const grid = document.getElementById("soldGrid");
 
-  grid.innerHTML = soldPlushies.map(p => `
-    <article class="sold-card--bg sold-${p.size}" style="background-image:url('${p.img}')">
-      <a class="sold-hit" href="${p.img}" target="_blank" rel="noopener"></a>
+  grid.innerHTML = soldPlushies.map((p, i) => {
+  const sizeClass = (i % 7 === 0) ? "sold-lg" : "";
+  return `
+    <article class="sold-card--bg ${sizeClass}" style="background-image:url('${p.img}')">
+      <a class="sold-hit" href="${p.img}" target="_blank" rel="noopener" aria-label="Open full image: ${p.plush}"></a>
 
-      <div class="sold-body">
-        <label class="field">
-          <span class="field-label">Plushie name</span>
-          <input class="field-input" value="${p.plush}" readonly>
-        </label>
+      <div class="sold-panel">
+        <div class="sold-row">
+          <div class="sold-label">Plushie</div>
+          <div class="sold-value">${p.plush || ""}</div>
+        </div>
 
-        <label class="field">
-          <span class="field-label">Buyer name</span>
-          <input class="field-input" value="${p.buyer}" readonly>
-        </label>
+        <div class="sold-row">
+          <div class="sold-label">Buyer</div>
+          <div class="sold-value">${p.buyer || ""}</div>
+        </div>
 
-        <label class="field">
-          <span class="field-label">Message</span>
-          <textarea class="field-input" readonly>${p.message}</textarea>
-        </label>
+        <div class="sold-message">
+          <div class="sold-label">Message</div>
+          <div class="sold-value">${p.message || ""}</div>
+        </div>
       </div>
     </article>
-  `).join("");
+  `;
+}).join("");
+
 </script>
 
 
