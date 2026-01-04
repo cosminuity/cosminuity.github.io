@@ -230,18 +230,18 @@ a:hover{
   overflow:hidden;
 }
 
-.sold-img{
-  display:block;
-  background:rgba(255,255,255,.03);
+.sold-img {
+  height: 160px;
+  overflow: hidden;
 }
 
-.sold-img img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
-  min-height:240px;
+.sold-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
+
 
 .sold-body{
   padding:14px;
