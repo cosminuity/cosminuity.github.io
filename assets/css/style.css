@@ -192,6 +192,8 @@ a:hover{
   color:var(--muted);
 }
 
+.heroPoster{ outline:6px solid red; }
+
 /* Footer */
 .footer{
   color:var(--muted);
