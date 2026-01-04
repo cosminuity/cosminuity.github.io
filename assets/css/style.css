@@ -180,16 +180,20 @@ a:hover{opacity:.92}
   grid-auto-flow:dense;
 }
 
-/* Plush archive cards, background image with fade */
+/* Landscape cards */
 .sold-card--bg{
   position:relative;
-  min-height:520px;
-  background-size:cover;
-  background-position:center;
   border:1px solid var(--line);
   border-radius:var(--radius);
   overflow:hidden;
   display:grid;
+
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  height: auto;
+
+  background-size: cover;
+  background-position: center;
 }
 
 .sold-card--bg .sold-hit{
@@ -233,15 +237,34 @@ a:hover{opacity:.92}
 }
 
 /* Push overlay content lower and keep it narrower */
+/* Text overlay anchored to bottom with clean spacing */
 .sold-card--bg .sold-body{
-  position:relative;
-  z-index:2;
-  align-self:end;
-  padding:22px;
-  padding-top: 600px; /* increase to push text lower */
-  max-width:740px;
-  display:grid;
-  gap:12px;
+  position: relative;
+  z-index: 2;
+  align-self: end;
+
+  padding: 22px;
+  max-width: 740px;
+
+  display: grid;
+  gap: 12px;
+}
+
+/* Solid dark base behind text */
+.sold-card--bg::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.85),
+    rgba(0,0,0,.55),
+    rgba(0,0,0,0)
+  );
+  z-index: 1;
 }
 
 /* Stronger fade only at the bottom so the top stays visible */
@@ -292,6 +315,12 @@ a:hover{opacity:.92}
     min-height: 300px;
   }
 
+  @media (max-width: 600px){
+  .sold-card--bg{
+    aspect-ratio: 4 / 3;
+  }
+}
+  
   /* Pull text overlay higher */
   .sold-card--bg .sold-body{
     padding-top: 150px;
