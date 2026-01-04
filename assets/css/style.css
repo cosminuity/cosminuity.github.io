@@ -59,3 +59,36 @@ a:hover{opacity:.92}
 @media (max-width:860px){
   .nav{gap:12px;flex-wrap:wrap}
 }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.tile {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius);
+}
+
+.meta {
+  margin-top: 8px;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
