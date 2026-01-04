@@ -277,12 +277,12 @@ a:hover{opacity:.92}
 
   /* Make cards shorter on phones */
   .sold-card--bg{
-    min-height: 380px;
+    min-height: 300px;
   }
 
   /* Pull text overlay higher */
   .sold-card--bg .sold-body{
-    padding-top: 200px;
+    padding-top: 150px;
     max-width: 100%;
   }
 
