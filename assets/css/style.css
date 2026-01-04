@@ -176,6 +176,7 @@ a:hover{opacity:.92}
   grid-template-columns:repeat(12,1fr);
   gap:16px;
   padding:16px 0 40px;
+  grid-auto-flow:dense;
 }
 
 /* Plush archive cards, background image with fade */
