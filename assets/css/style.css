@@ -139,7 +139,7 @@ a:hover{opacity:.92}
 
 /* Plushie page hero override only */
 .plushiePage .heroPoster{
-  background-image:url("../images/plushie/ozzieRen.png");
+  background-image:url("../images/ozzieRen.png");
   background-size:cover;
   background-position:center;
   min-height:40vh;
