@@ -252,3 +252,21 @@ a:hover{opacity:.92}
   body{padding-top:96px}
   .posterTitle{font-size:clamp(28px,10vw,48px);letter-spacing:.04em;text-align:center}
 }
+
+/* Push overlay content lower and keep it narrower */
+.sold-card--bg .sold-body{
+  align-self: end;
+  padding: 22px;
+  padding-top: 260px; /* increase to push text lower */
+  max-width: 740px;
+}
+
+/* Stronger fade only at the bottom so the top stays visible */
+.sold-card--bg::before{
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.10) 55%,
+    rgba(0,0,0,.88) 100%
+  );
+}
