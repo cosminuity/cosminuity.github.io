@@ -271,3 +271,18 @@ a:hover{opacity:.92}
     rgba(0,0,0,.88) 100%
   );
 }
+
+/* Collage sizes */
+.sold-sm{grid-column:span 6; min-height:360px}
+.sold-md{grid-column:span 12; min-height:520px}
+.sold-lg{grid-column:span 12; min-height:680px}
+
+@media (min-width: 900px){
+  .sold-sm{grid-column:span 4}
+  .sold-md{grid-column:span 6}
+  .sold-lg{grid-column:span 8}
+}
+
+@media (max-width: 820px){
+  .sold-sm,.sold-md,.sold-lg{grid-column:span 12}
+}
