@@ -67,32 +67,40 @@
   const grid = document.getElementById("soldGrid");
 
   grid.innerHTML = soldPlushies.map((p, i) => {
-    const sizeClass = (i % 7 === 0) ? "sold-lg" : "";
-  return `
-  <article class="sold-card--bg ${sizeClass}" style="background-image:url('${p.img}')">
-    <div class="sold-panel">
-      <div class="sold-row">
-        <div class="sold-label">Plushie</div>
-        <div class="sold-value">${p.plush || ""}</div>
-      </div>
+    const sizeClass =
+      p.size === "lg" ? "is-wide" :
+      p.size === "sm" ? "" :
+      "";
 
-      <div class="sold-row">
-        <div class="sold-label">Buyer</div>
-        <div class="sold-value">${p.buyer || ""}</div>
-      </div>
+    return `
+      <article class="sold-card ${sizeClass}">
+        <div class="sold-card--bg" style="background-image:url('${p.img}')">
+          <div class="sold-panel">
 
-      <details class="sold-details">
-        <summary class="sold-summary">Message</summary>
-        <div class="sold-message">
-          <div class="sold-value">${p.message ? p.message : "No message"}</div>
+            <div class="sold-row">
+              <div class="sold-label">Plushie</div>
+              <div class="sold-value">${p.plush || ""}</div>
+            </div>
+
+            <div class="sold-row">
+              <div class="sold-label">Buyer</div>
+              <div class="sold-value">${p.buyer || ""}</div>
+            </div>
+
+            <details class="sold-details">
+              <summary class="sold-summary">Message</summary>
+              <div class="sold-message">
+                <div class="sold-value">${p.message ? p.message : "No message"}</div>
+              </div>
+            </details>
+
+          </div>
         </div>
-      </details>
-    </div>
-  </article>
-`;
-
+      </article>
+    `;
   }).join("");
 </script>
+
 
 </body>
 </html>
