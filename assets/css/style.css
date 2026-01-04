@@ -238,7 +238,7 @@ a:hover{opacity:.92}
   z-index:2;
   align-self:end;
   padding:22px;
-  padding-top: 440px; /* increase to push text lower */
+  padding-top: 600px; /* increase to push text lower */
   max-width:740px;
   display:grid;
   gap:12px;
