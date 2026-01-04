@@ -272,6 +272,11 @@ a:hover{
   opacity:.95;
 }
 
+.sold-body textarea.field-input {
+  height: 200px;
+  resize: none;
+}
+
 @media (max-width: 820px){
   .sold-card{grid-template-columns:1fr}
   .sold-img img{min-height:220px}
