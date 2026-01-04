@@ -208,13 +208,6 @@ a:hover{opacity:.92}
   z-index:0;
 }
 
-/* hit area goes under the panel so the panel can be clicked */
-.sold-card--bg .sold-hit{
-  position:absolute;
-  inset:0;
-  z-index:2;
-}
-
 /* panel sits above the hit link and receives clicks */
 .sold-card--bg .sold-panel{
   position:absolute;
