@@ -32,9 +32,7 @@ a{
   text-decoration:none;
 }
 
-a:hover{
-  opacity:.92;
-}
+a:hover{opacity:.92}
 
 .container{
   max-width:var(--max);
@@ -49,7 +47,6 @@ a:hover{
   left:0;
   right:0;
   z-index:9999;
-
   background:linear-gradient(
     to bottom,
     rgba(10,10,15,.85),
@@ -62,8 +59,7 @@ a:hover{
 .navInner{
   max-width:var(--max);
   margin:0 auto;
-  padding:18px 18px;
-
+  padding:18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -118,7 +114,7 @@ a:hover{
   text-shadow:0 12px 40px rgba(0,0,0,.55);
 }
 
- Page hero */
+/* Page hero */
 .hero{
   padding-top:32px;
 }
@@ -142,27 +138,21 @@ a:hover{
 }
 
 /* Plushie page hero override only */
+.plushiePage .heroPoster{
+  background-image:url("../images/plushie/ozzieRen.png");
+  background-size:cover;
+  background-position:center;
+  min-height:40vh;
+}
 
-<style>
-  .heroPoster {
-    background-image: url("assets/images/plushie/ozzieRen.png");
-    background-size: cover;
-    background-position: center;
-    min-height: 40vh;
-  }
+.plushiePage .posterOverlay{
+  background:linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.65));
+}
 
-  .heroPoster .posterOverlay {
-    background: linear-gradient(
-      rgba(0,0,0,.35),
-      rgba(0,0,0,.65)
-    );
-  }
-
-  .heroPoster .posterTitle {
-    font-size: clamp(36px, 6vw, 64px);
-    letter-spacing: .04em;
-  }
-</style>
+.plushiePage .posterTitle{
+  font-size:clamp(36px,6vw,64px);
+  letter-spacing:.04em;
+}
 
 /* Gallery */
 .gallery{
@@ -174,13 +164,7 @@ a:hover{
 
 .tile{
   display:block;
-  color:inherit;
   border-radius:var(--radius);
-  outline:none;
-}
-
-.tile:focus-visible{
-  box-shadow:0 0 0 3px rgba(124,92,255,.45);
 }
 
 .thumb{
@@ -193,13 +177,9 @@ a:hover{
   transition:transform .15s ease;
 }
 
-.tile:hover .thumb{
-  transform:translateY(-2px);
-}
+.tile:hover .thumb{transform:translateY(-2px)}
 
-.meta{
-  margin-top:8px;
-}
+.meta{margin-top:8px}
 
 .title{
   margin:0;
@@ -222,14 +202,6 @@ a:hover{
   padding:26px 6px;
 }
 
-/* Responsive */
-@media (max-width:860px){
-  .nav{
-    flex-wrap:wrap;
-    gap:12px;
-  }
-}
-
 /* Plushies Sold page */
 .page-head{padding:24px 0 10px}
 .page-head h1{margin:0 0 6px;font-size:clamp(22px,3vw,34px)}
@@ -245,7 +217,7 @@ a:hover{
 .sold-card{
   grid-column:span 12;
   display:grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns:1.2fr 1fr;
   gap:16px;
   background:var(--panel);
   border:1px solid var(--line);
@@ -253,27 +225,26 @@ a:hover{
   overflow:hidden;
 }
 
-.sold-img {
-  height: 500px;
-  overflow: hidden;
+.sold-img{
+  height:220px;
+  overflow:hidden;
 }
 
-.sold-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.sold-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
-
 
 .sold-body{
   padding:14px;
   display:grid;
   gap:12px;
-  align-content:start;
 }
 
 .field{display:grid;gap:6px}
+
 .field-label{
   font-size:12px;
   letter-spacing:.02em;
@@ -288,20 +259,19 @@ a:hover{
   color:var(--text);
   padding:10px 12px;
   font:inherit;
-  resize:vertical;
 }
 
-.field-input[readonly]{
-  opacity:.95;
+.sold-body textarea.field-input{
+  height:200px;
+  resize:none;
 }
 
-.sold-body textarea.field-input {
-  height: 200px;
-  resize: none;
+/* Responsive */
+@media (max-width:860px){
+  .nav{gap:12px}
 }
 
-@media (max-width: 820px){
+@media (max-width:820px){
   .sold-card{grid-template-columns:1fr}
-  .sold-img img{min-height:220px}
+  .sold-img{height:180px}
 }
-
