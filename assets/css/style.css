@@ -118,7 +118,7 @@ a:hover{
   text-shadow:0 12px 40px rgba(0,0,0,.55);
 }
 
-/* Page hero */
+ Page hero */
 .hero{
   padding-top:32px;
 }
@@ -140,6 +140,29 @@ a:hover{
   color:var(--muted);
   max-width:520px;
 }
+
+/* Plushie page hero override only */
+
+<style>
+  .heroPoster {
+    background-image: url("assets/images/plushie/ozzieRen.png");
+    background-size: cover;
+    background-position: center;
+    min-height: 40vh;
+  }
+
+  .heroPoster .posterOverlay {
+    background: linear-gradient(
+      rgba(0,0,0,.35),
+      rgba(0,0,0,.65)
+    );
+  }
+
+  .heroPoster .posterTitle {
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: .04em;
+  }
+</style>
 
 /* Gallery */
 .gallery{
