@@ -83,14 +83,13 @@
             <div class="sold-value">${p.buyer || ""}</div>
           </div>
 
-          ${p.message ? `
-          <details class="sold-details">
-            <summary class="sold-summary">Message</summary>
-            <div class="sold-message">
-              <div class="sold-value">${p.message}</div>
-            </div>
-          </details>
-          ` : ``}
+                  <details class="sold-details">
+          <summary class="sold-summary">Message</summary>
+          <div class="sold-message">
+            <div class="sold-value">${p.message ? p.message : "No message"}</div>
+          </div>
+        </details>
+
         </div>
       </article>
     `;
