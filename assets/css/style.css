@@ -177,10 +177,31 @@ a:hover{opacity:.92}
 /* Plush archive grid */
 .sold-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:16px;
+  gap:12px;
   padding:16px 0 40px;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  grid-auto-flow:dense;
 }
+
+.sold-card{
+  grid-column:span 1;
+}
+
+.sold-card.is-wide{
+  grid-column:span 2;
+}
+
+.sold-card.is-tall{
+  grid-row:span 2;
+}
+
+@media (max-width:900px){
+  .sold-card.is-wide{
+    grid-column:span 1;
+  }
+}
+
+
 
 /* Card */
 .sold-card--bg{
