@@ -275,3 +275,42 @@ a:hover{opacity:.92}
   .sold-card{grid-template-columns:1fr}
   .sold-img{height:180px}
 }
+
+@media (max-width: 720px){
+
+  /* Banner layout */
+  .navInner{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .brand{
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .navlinks{
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .navlinks a{
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  /* Prevent hero from hiding under fixed nav */
+  body{
+    padding-top: 96px;
+  }
+
+  /* Hero text scale */
+  .posterTitle{
+    font-size: clamp(28px, 10vw, 48px);
+    letter-spacing: .04em;
+    text-align: center;
+  }
+}
+
