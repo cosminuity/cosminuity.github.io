@@ -180,7 +180,7 @@ a:hover{opacity:.92}
   padding:16px 0 40px;
 }
 
-/* Card: photo background + bottom info dock */
+/* Card: photo background + hover message reveal */
 .sold-card--bg{
   position:relative;
   border:1px solid var(--line);
@@ -189,8 +189,7 @@ a:hover{opacity:.92}
   background-size:cover;
   background-position:center;
   aspect-ratio:16/9;
-  display:flex;
-  align-items:flex-end;
+  display:block;
 }
 
 /* subtle overall tint so bright photos don’t wash out */
@@ -201,8 +200,8 @@ a:hover{opacity:.92}
   background:linear-gradient(
     to bottom,
     rgba(0,0,0,0) 0%,
-    rgba(0,0,0,.10) 55%,
-    rgba(0,0,0,.35) 100%
+    rgba(0,0,0,.08) 60%,
+    rgba(0,0,0,.22) 100%
   );
   z-index:0;
 }
@@ -211,35 +210,88 @@ a:hover{opacity:.92}
 .sold-card--bg .sold-hit{
   position:absolute;
   inset:0;
-  z-index:2;
+  z-index:3;
 }
 
-/* bottom dock */
+/* bottom dock: compact, feathered blur edge */
 .sold-card--bg .sold-panel{
-  position:relative;
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
   z-index:1;
-  width:100%;
-  padding:12px 14px;
+  padding:10px 12px;
+  overflow:hidden;
+}
+
+/* feathered blur + fade upward so it doesn't "cut" */
+.sold-card--bg .sold-panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  backdrop-filter:blur(10px);
   background:linear-gradient(
     to top,
-    rgba(0,0,0,.75),
-    rgba(0,0,0,.45),
-    rgba(0,0,0,0)
+    rgba(10,10,15,.88) 0%,
+    rgba(10,10,15,.62) 55%,
+    rgba(10,10,15,0) 100%
   );
-  backdrop-filter:blur(6px);
+  z-index:0;
+  pointer-events:none;
 }
 
-/* message gets a tighter clamp */
+.sold-card--bg .sold-panel > *{
+  position:relative;
+  z-index:1;
+}
+
+/* compact rows, no random dead space */
+.sold-row{
+  display:grid;
+  grid-template-columns:86px 1fr;
+  gap:8px;
+  align-items:baseline;
+  margin:0;
+  padding:0;
+}
+
+.sold-row + .sold-row{margin-top:6px}
+
+.sold-label{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.sold-value{
+  font-size:14px;
+  color:var(--text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* message hidden by default so the image wins */
 .sold-message{
   margin-top:8px;
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition:max-height .18s ease, opacity .18s ease;
 }
 
 .sold-message .sold-value{
   white-space:normal;
   display:-webkit-box;
-  -webkit-line-clamp:2;
+  -webkit-line-clamp:3;
   -webkit-box-orient:vertical;
   overflow:hidden;
+}
+
+/* reveal message on hover and keyboard focus */
+.sold-card--bg:hover .sold-message,
+.sold-card--bg:focus-within .sold-message{
+  max-height:140px;
+  opacity:1;
 }
 
 /* optional: make some cards wider */
@@ -251,6 +303,6 @@ a:hover{opacity:.92}
 /* mobile */
 @media (max-width: 600px){
   .sold-card--bg{aspect-ratio:4/3}
-  .sold-row{grid-template-columns:95px 1fr}
-  .sold-card--bg .sold-panel{padding:12px}
+  .sold-row{grid-template-columns:78px 1fr}
+  .sold-card--bg .sold-panel{padding:10px 10px}
 }
