@@ -10,14 +10,9 @@
 }
 
 *{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  padding:0;
-}
+html,body{margin:0;padding:0}
 
 body{
-  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Apple Color Emoji","Segoe UI Emoji";
   background:
     radial-gradient(1200px 800px at 15% 10%, rgba(124,92,255,.18), transparent 60%),
     radial-gradient(900px 700px at 85% 25%, rgba(255,255,255,.07), transparent 55%),
@@ -27,11 +22,7 @@ body{
   padding-top:76px;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
+a{color:inherit;text-decoration:none}
 a:hover{opacity:.92}
 
 .container{
@@ -40,12 +31,10 @@ a:hover{opacity:.92}
   padding:28px 18px;
 }
 
-/* Navigation */
+/* Nav */
 .nav{
   position:fixed;
-  top:0;
-  left:0;
-  right:0;
+  top:0;left:0;right:0;
   z-index:9999;
   background:linear-gradient(
     to bottom,
@@ -65,15 +54,9 @@ a:hover{opacity:.92}
   justify-content:space-between;
 }
 
-.brand{
-  font-weight:700;
-  letter-spacing:.3px;
-}
+.brand{font-weight:700;letter-spacing:.3px}
 
-.navlinks{
-  display:flex;
-  gap:14px;
-}
+.navlinks{display:flex;gap:14px}
 
 .navlinks a{
   padding:10px 12px;
@@ -89,7 +72,7 @@ a:hover{opacity:.92}
   background:rgba(255,255,255,.04);
 }
 
-/* Hero banner */
+/* Hero */
 .heroPoster{
   height:78vh;
   min-height:520px;
@@ -115,34 +98,17 @@ a:hover{opacity:.92}
 }
 
 /* Page hero */
-.hero{
-  padding-top:32px;
-}
+.hero{padding-top:32px}
+.kicker{color:var(--muted);font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+.h1{font-size:clamp(32px,6vw,56px);font-weight:700;margin:8px 0 12px}
+.lead{color:var(--muted);max-width:520px}
 
-.kicker{
-  color:var(--muted);
-  font-size:14px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-
-.h1{
-  font-size:clamp(32px,6vw,56px);
-  font-weight:700;
-  margin:8px 0 12px;
-}
-
-.lead{
-  color:var(--muted);
-  max-width:520px;
-}
-
-/* Plushie page hero override only */
+/* Plushie page hero */
 .plushiePage .heroPoster{
+  min-height:40vh;
   background-image:url("../images/ozzieRen.png");
   background-size:cover;
   background-position:center;
-  min-height:40vh;
 }
 
 .plushiePage .posterOverlay{
@@ -156,22 +122,19 @@ a:hover{opacity:.92}
 
 /* Store page hero */
 .storePage .heroPoster{
-  min-height: 50vh;
-  background-image: url("../images/store.png");
-  background-size: cover;
-  background-position: center;
+  min-height:50vh;
+  background-image:url("../images/store.png");
+  background-size:cover;
+  background-position:center;
 }
 
 .storePage .posterOverlay{
-  background: linear-gradient(
-    rgba(0,0,0,.25),
-    rgba(0,0,0,.6)
-  );
+  background:linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.6));
 }
 
 .storePage .posterTitle{
-  font-size: clamp(40px, 7vw, 90px);
-  letter-spacing: .06em;
+  font-size:clamp(40px,7vw,90px);
+  letter-spacing:.06em;
 }
 
 /* Gallery */
@@ -182,10 +145,7 @@ a:hover{opacity:.92}
   margin-top:32px;
 }
 
-.tile{
-  display:block;
-  border-radius:var(--radius);
-}
+.tile{display:block;border-radius:var(--radius)}
 
 .thumb{
   width:100%;
@@ -200,29 +160,13 @@ a:hover{opacity:.92}
 .tile:hover .thumb{transform:translateY(-2px)}
 
 .meta{margin-top:8px}
-
-.title{
-  margin:0;
-  font-weight:600;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.sub{
-  margin:4px 0 0;
-  font-size:.9rem;
-  color:var(--muted);
-}
+.title{margin:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub{margin:4px 0 0;font-size:.9rem;color:var(--muted)}
 
 /* Footer */
-.footer{
-  color:var(--muted);
-  font-size:14px;
-  padding:26px 6px;
-}
+.footer{color:var(--muted);font-size:14px;padding:26px 6px}
 
-/* Plushies Sold page */
+/* Plush archive layout */
 .page-head{padding:24px 0 10px}
 .page-head h1{margin:0 0 6px;font-size:clamp(22px,3vw,34px)}
 .muted{color:var(--muted)}
@@ -234,103 +178,77 @@ a:hover{opacity:.92}
   padding:16px 0 40px;
 }
 
-.sold-card{
+/* Plush archive cards, background image with fade */
+.sold-card--bg{
   grid-column:span 12;
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-  gap:16px;
-  background:var(--panel);
+  position:relative;
+  min-height:520px;
+  background-size:cover;
+  background-position:center;
   border:1px solid var(--line);
   border-radius:var(--radius);
   overflow:hidden;
+  display:grid;
 }
 
-.sold-img {
-  height: auto;
+.sold-card--bg .sold-hit{
+  position:absolute;
+  inset:0;
+  z-index:1;
 }
 
-.sold-img img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  background: #0b0c10;
+.sold-card--bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.05) 0%,
+    rgba(0,0,0,.25) 45%,
+    rgba(0,0,0,.88) 100%
+  );
+  z-index:0;
 }
 
-
-.sold-body{
-  padding:14px;
+.sold-card--bg .sold-body{
+  position:relative;
+  z-index:2;
+  align-self:end;
+  padding:18px;
   display:grid;
   gap:12px;
 }
 
 .field{display:grid;gap:6px}
-
-.field-label{
-  font-size:12px;
-  letter-spacing:.02em;
-  color:var(--muted);
-}
+.field-label{font-size:12px;letter-spacing:.02em;color:var(--muted)}
 
 .field-input{
   width:100%;
   border-radius:12px;
-  border:1px solid var(--line);
-  background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(0,0,0,.35);
   color:var(--text);
   padding:10px 12px;
   font:inherit;
+  backdrop-filter:blur(6px);
 }
 
-.sold-body textarea.field-input{
-  height:200px;
+.sold-card--bg textarea.field-input{
+  min-height:140px;
+  height:auto;
   resize:none;
 }
 
 /* Responsive */
-@media (max-width:860px){
-  .nav{gap:12px}
-}
-
-@media (max-width:820px){
-  .sold-card{grid-template-columns:1fr}
-  .sold-img{height:180px}
+@media (max-width: 820px){
+  .sold-card--bg{min-height:560px}
 }
 
 @media (max-width: 720px){
-
-  /* Banner layout */
-  .navInner{
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  .brand{
-    text-align: center;
-    font-size: 18px;
-  }
-
-  .navlinks{
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .navlinks a{
-    padding: 8px 10px;
-    font-size: 14px;
-  }
-
-  /* Prevent hero from hiding under fixed nav */
-  body{
-    padding-top: 96px;
-  }
-
-  /* Hero text scale */
-  .posterTitle{
-    font-size: clamp(28px, 10vw, 48px);
-    letter-spacing: .04em;
-    text-align: center;
-  }
+  .navInner{flex-direction:column;align-items:stretch;gap:10px}
+  .brand{text-align:center;font-size:18px}
+  .navlinks{justify-content:center;flex-wrap:wrap;gap:8px}
+  .navlinks a{padding:8px 10px;font-size:14px}
+  body{padding-top:96px}
+  .posterTitle{font-size:clamp(28px,10vw,48px);letter-spacing:.04em;text-align:center}
 }
-
