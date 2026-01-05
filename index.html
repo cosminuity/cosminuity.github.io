@@ -40,13 +40,21 @@
       position:relative;
       z-index:2;
       width:min(1080px, calc(100% - 32px));
-      padding: 26px 18px;
+      padding: 26px 22px;
       border:1px solid rgba(255,255,255,.10);
       border-radius:var(--radius);
       background: rgba(18,20,27,.48);
       box-shadow: 0 18px 60px rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
+
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      align-items:center;
     }
+
+    .posterLeft{min-width:0}
+    .posterRight{min-width:0; display:grid; gap:12px; justify-items:start}
 
     .posterTitle{
       margin:0;
@@ -60,7 +68,7 @@
     }
 
     .posterKicker{
-      margin-top: 10px;
+      margin:0;
       color: rgba(233,233,239,.86);
       max-width: 70ch;
       line-height: 1.5;
@@ -299,6 +307,54 @@
       .grid{grid-template-columns:1fr}
       .homeTitle{font-size:24px}
       .heroPoster{min-height:42vh;height:auto}
+      .posterOverlay{grid-template-columns:1fr}
+      .posterRight{justify-items:start}
+    }
+
+    /* MOBILE HERO FIX */
+    @media (max-width: 720px){
+      .heroPoster{
+        min-height:0;
+        height:auto;
+        place-items:start center;
+        padding:16px 0 22px;
+      }
+
+      .posterOverlay{
+        width:calc(100% - 24px);
+        padding:14px;
+        gap:12px;
+      }
+
+      .posterTitle{
+        letter-spacing:.06em;
+        font-size: clamp(32px, 10vw, 46px);
+      }
+
+      .posterRight{
+        gap:10px;
+      }
+
+      .posterKicker{
+        font-size:14px;
+        line-height:1.45;
+        max-width:40ch;
+      }
+
+      .posterCtas{
+        width:100%;
+        display:grid;
+        grid-template-columns:1fr;
+        gap:10px;
+        margin-top:4px;
+      }
+
+      .posterCtas .btn{
+        width:100%;
+        justify-content:center;
+        padding:12px 14px;
+        border-radius:14px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -314,13 +370,18 @@
 
   <header class="heroPoster" id="heroPoster">
     <div class="posterOverlay reveal">
-      <h1 class="posterTitle">COSMINUITY</h1>
-      <p class="posterKicker">
-        Animations, art, plush drops, and ideas. A small run character project, plus the home of the Platypys.
-      </p>
-      <div class="homeCtas" style="margin-top:14px">
-        <a class="btn primary" href="archive.html">View the Plush Archive</a>
-        <a class="btn" href="store.html">Visit the Store</a>
+      <div class="posterLeft">
+        <h1 class="posterTitle">COSMINUITY</h1>
+      </div>
+
+      <div class="posterRight">
+        <p class="posterKicker">
+          Animations, art, plush drops, and ideas. A small run character project, plus the home of the Platypys.
+        </p>
+        <div class="homeCtas posterCtas">
+          <a class="btn primary" href="archive.html">View the Plush Archive</a>
+          <a class="btn" href="store.html">Visit the Store</a>
+        </div>
       </div>
     </div>
   </header>
