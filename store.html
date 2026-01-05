@@ -222,6 +222,61 @@
       opacity:.0;
       transition: opacity 200ms ease;
     }
+    .hero-arrows{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+}
+
+.hero-arrow{
+  position:absolute;
+  top:50%;
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.28);
+  backdrop-filter: blur(10px);
+  display:grid;
+  place-items:center;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.hero-arrow::before{
+  content:"";
+  width:10px;
+  height:10px;
+  border-right:2px solid rgba(233,233,239,.85);
+  border-bottom:2px solid rgba(233,233,239,.85);
+}
+
+.hero-arrow.left{
+  left:12px;
+}
+.hero-arrow.left::before{
+  transform: rotate(135deg);
+}
+
+.hero-arrow.right{
+  right:12px;
+}
+.hero-arrow.right::before{
+  transform: rotate(-45deg);
+}
+
+.hero:hover .hero-arrow{
+  opacity:.9;
+}
+
+@media (max-width: 720px){
+  .hero-arrow{
+    opacity:.9;
+  }
+}
+
     .hero:hover .hint{opacity:.85}
     .hint span{
       font-size:12px;
@@ -354,6 +409,11 @@
           <span>Click sides to skip</span>
           <span>Click center for details</span>
         </div>
+
+      <div class="hero-arrows" aria-hidden="true">
+        <div class="hero-arrow left"></div>
+        <div class="hero-arrow right"></div>
+      </div>
 
         <div class="hero-frame" id="heroFrame">
           <div class="hero-media" id="heroMedia"></div>
