@@ -53,11 +53,18 @@ function injectHero() {
   `;
 }
 
-function setYear() {
-  const y = document.getElementById("y");
+async function injectFooter(){
+  const mount = document.getElementById("siteFooter");
+  if (!mount) return;
+
+  const url = new URL("/footer.html", window.location.origin);
+  const html = await fetch(url).then(r => r.text());
+  mount.innerHTML = html;
+
+  const y = mount.querySelector("#y");
   if (y) y.textContent = new Date().getFullYear();
 }
 
 injectNav();
 injectHero();
-setYear();
+injectFooter();
