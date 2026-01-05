@@ -6,20 +6,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cosminuity</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- Base styles -->
   <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- Global theme overrides -->
   <link rel="stylesheet" href="assets/css/theme.css" />
+
+  <style>
+    .homeWrap{padding:18px 0 44px}
+    .homeHero{
+      display:grid;
+      gap:14px;
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(18,20,27,.66);
+      box-shadow:0 12px 40px rgba(0,0,0,.28);
+    }
+    .homeTitle{
+      margin:0;
+      font-family:"Space Grotesk", ui-sans-serif, system-ui;
+      font-weight:700;
+      letter-spacing:.02em;
+      font-size:28px;
+    }
+    .homeSub{
+      margin:0;
+      color:var(--muted);
+      max-width:68ch;
+      line-height:1.5;
+    }
+    .homeCtas{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 12px;
+      font:inherit;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .btn.primary{
+      border-color:rgba(124,92,255,.55);
+      background:rgba(124,92,255,.16);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:14px;
+      margin-top:14px;
+      align-items:start;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(18,20,27,.62);
+      overflow:hidden;
+      box-shadow:0 12px 40px rgba(0,0,0,.22);
+    }
+    .cardPad{padding:14px}
+    .cardTitle{
+      margin:0 0 6px;
+      font-weight:700;
+      letter-spacing:.01em;
+      font-size:16px;
+    }
+    .cardMuted{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+    .previewGrid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+    .preview{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      background:rgba(0,0,0,.18);
+      overflow:hidden;
+      position:relative;
+      aspect-ratio: 1 / 1;
+    }
+    .preview::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: var(--img);
+      background-size: cover;
+      background-position: 50% 50%;
+      transform: scale(1.02);
+      filter:saturate(1.02) contrast(1.02);
+    }
+    .preview::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0) 55%);
+      pointer-events:none;
+    }
+    .previewLabel{
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      display:inline-flex;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.36);
+      font-size:12px;
+      color:rgba(233,233,239,.9);
+      max-width:calc(100% - 20px);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .list{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      background:rgba(0,0,0,.16);
+    }
+    .row strong{font-size:13px}
+    .row span{color:var(--muted);font-size:12px}
+    .smallLink{font-size:13px;color:var(--text);text-decoration:none}
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+      .homeTitle{font-size:24px}
+    }
+  </style>
 </head>
 
 <body data-page="home">
-
   <div id="siteNav"></div>
 
   <header class="heroPoster">
@@ -28,11 +159,59 @@
     </div>
   </header>
 
+  <main class="container homeWrap">
+    <section class="homeHero">
+      <h2 class="homeTitle">Plush drops, archived.</h2>
+      <p class="homeSub">
+        Cosminuity is a small run character project. The archive documents each plush release with photos and details.
+      </p>
+      <div class="homeCtas">
+        <a class="btn primary" href="archive.html">View the Plush Archive</a>
+        <a class="btn" href="store.html">Visit the Store</a>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Homepage highlights">
+      <div class="card">
+        <div class="cardPad">
+          <h3 class="cardTitle">Archive preview</h3>
+          <p class="cardMuted">A quick look at recent releases. Click any tile to jump into the archive.</p>
+
+          <div class="previewGrid">
+            <a class="preview" href="archive.html" style="--img:url('assets/images/store/w24-platypys-cos.jpg')" aria-label="Cos Platypys preview">
+              <span class="previewLabel">Cos Platypys</span>
+            </a>
+            <a class="preview" href="archive.html" style="--img:url('assets/images/store/w24-platypys-banana.jpg')" aria-label="Banana Platypys preview">
+              <span class="previewLabel">Banana Platypys</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <div class="cardPad">
+          <h3 class="cardTitle">Start here</h3>
+          <p class="cardMuted">If you only click two things, make it these.</p>
+
+          <div class="list">
+            <div class="row">
+              <strong>Plush Archive</strong>
+              <a class="smallLink" href="archive.html">Open</a>
+            </div>
+            <div class="row">
+              <strong>Store</strong>
+              <a class="smallLink" href="store.html">Open</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
   <div class="container">
     <div class="footer">© <span id="y"></span> Cosminuity</div>
   </div>
 
   <script src="assets/js/layout.js"></script>
-
 </body>
 </html>
