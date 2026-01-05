@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const products = window.products || []
+  const items = window.products || []
 
   const grid = document.getElementById("grid")
   const q = document.getElementById("q")
