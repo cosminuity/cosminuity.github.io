@@ -311,7 +311,7 @@
       .posterRight{justify-items:start}
     }
 
-    /* MOBILE HERO FIX */
+    /* MOBILE HERO FIX + CENTERING OF LOWER BOXES */
     @media (max-width: 720px){
       .heroPoster{
         min-height:0;
@@ -321,14 +321,15 @@
       }
 
       .posterOverlay{
-        width:calc(100% - 24px);
+        width: min(560px, calc(100% - 40px));
+        margin: 0 auto;
         padding:14px;
         gap:12px;
       }
 
       .posterTitle{
         letter-spacing:.06em;
-        font-size: clamp(32px, 10vw, 46px);
+        font-size: clamp(32px, 10vw, 44px);
       }
 
       .posterRight{
@@ -354,6 +355,39 @@
         justify-content:center;
         padding:12px 14px;
         border-radius:14px;
+      }
+
+      /* Center and slightly shrink the content boxes below */
+      .container{
+        padding-left:14px;
+        padding-right:14px;
+      }
+
+      .homeWrap{
+        padding:14px 0 40px;
+      }
+
+      .homeHero{
+        max-width: 620px;
+        margin: 0 auto;
+      }
+
+      .grid{
+        max-width: 620px;
+        margin-left:auto;
+        margin-right:auto;
+      }
+
+      .card{
+        border-radius:18px;
+      }
+
+      .cardPad{
+        padding:14px;
+      }
+
+      .homeCtas{
+        justify-content:center;
       }
     }
 
