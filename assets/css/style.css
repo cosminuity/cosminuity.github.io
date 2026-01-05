@@ -423,8 +423,10 @@ a:hover{opacity:.92}
     gap:8px;
     flex:1 1 auto;
     min-width:0;
-    margin-left:auto;
-    justify-content:flex-end;
+    margin-left:0;
+    justify-content:flex-start;
+    cursor: grab;
+
 
     width:100%;
     max-width:calc(100vw - 140px);
