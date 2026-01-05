@@ -11,24 +11,44 @@ function setActiveLink(root, page) {
 }
 
 function getBaseHref() {
-  const baseEl = document.querySelector("base[href]");
-  if (baseEl) return baseEl.getAttribute("href") || "";
+  const baseEl = document.querySelector('base[href]');
+  if (baseEl) return baseEl.getAttribute('href') || '';
 
-  const p = window.location.pathname;
+  const p = window.location.pathname.replace(/\\/g, '/');
+  const file = p.split('/').filter(Boolean).pop() || '';
 
-  // If we're inside /products/, go up one level.
-  if (p.includes("/products/")) return "../";
+  // If we're at a file in a subfolder (not the root), go up one level.
+  // Example: /REPO/products/item.html => ../
+  // Example: /REPO/store.html => ''
+  const parts = p.split('/').filter(Boolean);
 
-  // Same folder as nav.html for root pages in the repo.
-  return "";
+  // Heuristic: if the last part contains a dot it's a file.
+  // If there are more than 2 parts (USER, REPO, maybe folder, file), we might be nested.
+  // Safer: look for "products" anywhere, case insensitive.
+  if (parts.some(seg => seg.toLowerCase() === 'products')) return '../';
+
+  return '';
 }
 
 async function injectNav() {
   const mount = document.getElementById("siteNav");
   if (!mount) return;
 
+  const tryFetch = async (url) => {
+    const r = await fetch(url, { cache: "no-store" });
+    if (!r.ok) throw new Error(url);
+    return r.text();
+  };
+
   const base = getBaseHref();
-  const html = await fetch(`${base}nav.html`).then(r => r.text());
+
+  let html = "";
+  try {
+    html = await tryFetch(`${base}nav.html`);
+  } catch {
+    html = await tryFetch("nav.html");
+  }
+
   mount.innerHTML = html;
 
   const page = document.body.dataset.page || "";
