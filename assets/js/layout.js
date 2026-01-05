@@ -7,27 +7,17 @@ function setActiveLink(root, page) {
   links.forEach(a => a.classList.toggle("active", a.getAttribute("data-page") === page));
 }
 
-function injectNav() {
+async function injectNav() {
   const mount = document.getElementById("siteNav");
   if (!mount) return;
 
-  mount.innerHTML = `
-    <nav class="nav">
-      <div class="navInner">
-        <a class="brand" href="index.html" data-page="home">Cosminuity</a>
-        <div class="navlinks">
-            <a href="gallery.html" data-page="gallery">Gallery</a>
-            <a href="plushie.html" data-page="plushie">Plushies Sold</a>
-            <a href="store.html" data-page="store">Store</a>
-            <a href="about.html" data-page="about">About</a>
-        </div>
-      </div>
-    </nav>
-  `;
+  const html = await fetch("nav.html").then(r => r.text());
+  mount.innerHTML = html;
 
   const page = document.body.dataset.page || "";
   setActiveLink(mount, page);
 }
+
 
 function injectHero() {
   const mount = document.getElementById("siteHero");
