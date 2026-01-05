@@ -157,6 +157,59 @@
       line-height:1.35;
       margin:0;
     }
+
+    /* board animations only, no external css edits */
+    .sold-card{
+      opacity:0;
+      transform:translateY(16px) scale(.98);
+      transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1);
+      will-change: transform, opacity;
+    }
+    .sold-card.is-visible{
+      opacity:1;
+      transform:none;
+    }
+
+    .sold-card--bg{
+      transition: transform .35s ease, filter .35s ease;
+      will-change: transform, filter;
+    }
+    .sold-card:hover .sold-card--bg{
+      transform:scale(1.03);
+      filter:brightness(1.05) contrast(1.05);
+    }
+
+    .sold-panel{
+      transition: backdrop-filter .25s ease, background .25s ease;
+    }
+    .sold-card:hover .sold-panel{
+      backdrop-filter: blur(18px);
+    }
+
+    .sold-drawer{
+      overflow:hidden;
+      max-height:0;
+      opacity:0;
+      transition: max-height .45s ease, opacity .3s ease;
+    }
+    details[open] .sold-drawer{
+      max-height:400px;
+      opacity:1;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .sold-card, .sold-card--bg, .sold-panel, .sold-drawer{
+        transition:none !important;
+      }
+      .sold-card{
+        opacity:1;
+        transform:none;
+      }
+      .sold-drawer{
+        max-height:none;
+        opacity:1;
+      }
+    }
   </style>
 </head>
 
@@ -179,10 +232,11 @@
         </div>
 
         <a
-              class="btn"
-              href="mailto:Cosminuity@gmail.com?subject=Plush%20Archive%20Submission&body=Paste%20this%20template%20and%20attach%20a%20photo.%0A%0AName%20or%20alias%3A%20%0APlush%20name%20or%20ID%3A%20%0AOrder%20number%20(optional%20for%20now)%3A%20%0AMessage%3A%20%0A%0APhoto%3A%20(attach%20image)"
-            >
-              Submit a Plush
+          id="openSubmitPlush"
+          class="btn"
+          href="mailto:Cosminuity@gmail.com?subject=Plush%20Archive%20Submission&body=Paste%20this%20template%20and%20attach%20a%20photo.%0A%0AName%20or%20alias%3A%20%0APlush%20name%20or%20ID%3A%20%0AOrder%20number%20(optional%20for%20now)%3A%20%0AMessage%3A%20%0A%0APhoto%3A%20(attach%20image)"
+        >
+          Submit a Plush
         </a>
       </div>
     </section>
@@ -240,6 +294,10 @@
             <input class="field-input" name="email" type="email" autocomplete="email" placeholder="Optional">
           </label>
         </form>
+
+        <p class="help" style="margin-top:10px">
+          Photo attachments cannot be included automatically. After this opens your email, attach your image manually.
+        </p>
       </div>
 
       <div class="modalFooter">
@@ -317,6 +375,39 @@
       `;
     }).join("");
 
+    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!prefersReduced) {
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      document.querySelectorAll(".sold-card").forEach(card => observer.observe(card));
+
+      document.querySelectorAll(".sold-card").forEach(card => {
+        const bg = card.querySelector(".sold-card--bg");
+        card.addEventListener("mousemove", e => {
+          const r = card.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width - 0.5) * 6;
+          const y = ((e.clientY - r.top) / r.height - 0.5) * 6;
+          bg.style.transform = `scale(1.04) translate(${x}px, ${y}px)`;
+        });
+        card.addEventListener("mouseleave", () => {
+          bg.style.transform = "";
+        });
+      });
+    } else {
+      document.querySelectorAll(".sold-card").forEach(card => card.classList.add("is-visible"));
+    }
+
     const modal = document.getElementById("submitModal");
     const openBtn = document.getElementById("openSubmitPlush");
     const closeBtn = document.getElementById("closeSubmitPlush");
@@ -336,10 +427,16 @@
       modal.classList.remove("is-open");
       modal.setAttribute("aria-hidden","true");
       document.body.style.overflow = "";
-      openBtn.focus();
+      if (openBtn) openBtn.focus();
     }
 
-    openBtn.addEventListener("click", openModal);
+    if (openBtn){
+      openBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    }
+
     closeBtn.addEventListener("click", closeModal);
     cancelBtn.addEventListener("click", closeModal);
 
@@ -350,6 +447,27 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
     });
+
+    function makeMailto(payload){
+      const subject = "Plush Archive Submission";
+      const lines = [
+        "Paste this template and attach a photo.",
+        "",
+        "Name or alias: " + (payload.alias || ""),
+        "Plush name or ID: " + (payload.plush || ""),
+        "Order number (optional for now): " + (payload.order || ""),
+        "Email (optional): " + (payload.email || ""),
+        "",
+        "Message:",
+        (payload.message || ""),
+        "",
+        "Photo: (attach image)"
+      ];
+      const body = lines.join("\n");
+      return "mailto:Cosminuity@gmail.com"
+        + "?subject=" + encodeURIComponent(subject)
+        + "&body=" + encodeURIComponent(body);
+    }
 
     sendBtn.addEventListener("click", () => {
       const data = new FormData(form);
@@ -367,8 +485,7 @@
         return;
       }
 
-      console.log("Submit Plush Payload:", payload);
-      alert("Submitted. Submissions are reviewed before appearing in the archive.");
+      window.location.href = makeMailto(payload);
       form.reset();
       closeModal();
     });
