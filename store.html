@@ -437,231 +437,233 @@
 
       <div class="grid" id="grid"></div>
 
-      <div class="footer-note">Template uses local filler images. Replace image paths in the data list.</div>
+      <div class="footer-note">Template uses local filler images.</div>
     </section>
   </main>
 
-  <script>
-    const season = {
-      title: "Winter 2024 Drop",
-      subtitle: "Sold out. Browse the season."
-    };
+ <script>
+  const season = {
+    title: "Winter 2026 Drop",
+    subtitle: "Curated designs. Browse the season."
+  };
 
-    /*
-      Put your images in: /assets/images/store/
-      Example files (replace with your real ones):
-      assets/images/store/w24-platypus.jpg
-      assets/images/store/w24-ghost.jpg
-      assets/images/store/w24-frog.jpg
-      assets/images/store/w24-bunny.jpg
-      assets/images/store/w24-cat.jpg
-    */
-    const products = [
-      {
-        id: "w24-platypus-v1",
-        name: "Platypus V1",
-        season: "Winter 2024",
-        status: "sold",
-        image: "assets/images/store/w24-platypus.jpg",
-        panFrom: "42% 50%",
-        panTo: "58% 50%",
-        heroPos: "50% 50%",
-        href: "products/w24-platypus-v1.html"
-      },
-      {
-        id: "w24-ghost-blob",
-        name: "Ghost Blob",
-        season: "Winter 2024",
-        status: "sold",
-        image: "assets/images/store/w24-ghost.jpg",
-        panFrom: "40% 48%",
-        panTo: "60% 52%",
-        heroPos: "50% 50%",
-        href: "products/w24-ghost-blob.html"
-      },
-      {
-        id: "w24-frog-square",
-        name: "Frog Square",
-        season: "Winter 2024",
-        status: "sold",
-        image: "assets/images/store/w24-frog.jpg",
-        panFrom: "45% 52%",
-        panTo: "55% 48%",
-        heroPos: "50% 50%",
-        href: "products/w24-frog-square.html"
-      },
-      {
-        id: "w24-bunny-moon",
-        name: "Bunny Moon",
-        season: "Winter 2024",
-        status: "sold",
-        image: "assets/images/store/w24-bunny.jpg",
-        panFrom: "44% 50%",
-        panTo: "56% 50%",
-        heroPos: "50% 50%",
-        href: "products/w24-bunny-moon.html"
-      },
-      {
-        id: "w24-night-cat",
-        name: "Night Cat",
-        season: "Winter 2024",
-        status: "sold",
-        image: "assets/images/store/w24-cat.jpg",
-        panFrom: "43% 49%",
-        panTo: "57% 51%",
-        heroPos: "50% 50%",
-        href: "products/w24-night-cat.html"
-      }
-    ];
-
-    const featuredCount = Math.min(5, products.length);
-    const featured = products.slice(0, featuredCount);
-
-    const els = {
-      infoBtn: document.getElementById("infoBtn"),
-      storeInfo: document.getElementById("storeInfo"),
-      seasonTitle: document.getElementById("seasonTitle"),
-      seasonSub: document.getElementById("seasonSub"),
-      hero: document.getElementById("hero"),
-      heroMedia: document.getElementById("heroMedia"),
-      heroFrame: document.getElementById("heroFrame"),
-      heroName: document.getElementById("heroName"),
-      heroSeason: document.getElementById("heroSeason"),
-      heroStatus: document.getElementById("heroStatus"),
-      prevBtn: document.getElementById("prevBtn"),
-      nextBtn: document.getElementById("nextBtn"),
-      openBtn: document.getElementById("openBtn"),
-      grid: document.getElementById("grid")
-    };
-
-    els.seasonTitle.textContent = season.title;
-    els.seasonSub.textContent = season.subtitle;
-
-    let index = 0;
-    let timer = null;
-    let paused = false;
-
-    function setHero(i, {fade=true} = {}){
-      const p = featured[i];
-      if (!p) return;
-
-      if (fade){
-        els.heroMedia.style.opacity = "0";
-        window.setTimeout(() => applyHero(p), 180);
-        window.setTimeout(() => els.heroMedia.style.opacity = "1", 260);
-      } else {
-        applyHero(p);
-      }
+  const products = [
+    {
+      id: "w26-platypys-college",
+      name: "College",
+      season: "Winter 2026",
+      status: "sold",
+      image: "assets/images/store/w26-platypys-college.jpg",
+      panFrom: "42% 50%",
+      panTo: "58% 50%",
+      heroPos: "50% 50%",
+      href: "products/w26-platypys-college.html"
+    },
+    {
+      id: "w26-platypys-fire",
+      name: "Fire",
+      season: "Winter 2026",
+      status: "sold",
+      image: "assets/images/store/w26-platypys-fire.jpg",
+      panFrom: "40% 48%",
+      panTo: "60% 52%",
+      heroPos: "50% 50%",
+      href: "products/w26-platypys-fire.html"
+    },
+    {
+      id: "w26-platypys-gally",
+      name: "Gallery",
+      season: "Winter 2026",
+      status: "sold",
+      image: "assets/images/store/w26-platypys-gally.jpg",
+      panFrom: "45% 52%",
+      panTo: "55% 48%",
+      heroPos: "50% 50%",
+      href: "products/w26-platypys-gally.html"
+    },
+    {
+      id: "w26-platypys-nurse",
+      name: "Nurse",
+      season: "Winter 2026",
+      status: "sold",
+      image: "assets/images/store/w26-platypys-nurse.jpg",
+      panFrom: "44% 50%",
+      panTo: "56% 50%",
+      heroPos: "50% 50%",
+      href: "products/w26-platypys-nurse.html"
+    },
+    {
+      id: "w24-platypys-banana",
+      name: "Banana",
+      season: "Winter 2024",
+      status: "sold",
+      image: "assets/images/store/w24-platypys-banana.jpg",
+      panFrom: "43% 49%",
+      panTo: "57% 51%",
+      heroPos: "50% 50%",
+      href: "products/w24-platypys-banana.html"
+    },
+    {
+      id: "w24-platypys-cos",
+      name: "Cos",
+      season: "Winter 2024",
+      status: "sold",
+      image: "assets/images/store/w24-platypys-cos.jpg",
+      panFrom: "43% 49%",
+      panTo: "57% 51%",
+      heroPos: "50% 50%",
+      href: "products/w24-platypys-cos.html"
     }
+  ];
 
-    function applyHero(p){
-      els.heroFrame.style.setProperty("--heroImage", `url("${p.image}")`);
-      els.heroFrame.style.setProperty("--panFrom", p.panFrom || "42% 50%");
-      els.heroFrame.style.setProperty("--panTo", p.panTo || "58% 50%");
-      els.heroFrame.style.setProperty("--heroPos", p.heroPos || "50% 50%");
+  const featuredCount = Math.min(5, products.length);
+  const featured = products.slice(0, featuredCount);
 
-      els.heroName.textContent = p.name;
-      els.heroSeason.textContent = p.season;
+  const els = {
+    infoBtn: document.getElementById("infoBtn"),
+    storeInfo: document.getElementById("storeInfo"),
+    seasonTitle: document.getElementById("seasonTitle"),
+    seasonSub: document.getElementById("seasonSub"),
+    hero: document.getElementById("hero"),
+    heroMedia: document.getElementById("heroMedia"),
+    heroFrame: document.getElementById("heroFrame"),
+    heroName: document.getElementById("heroName"),
+    heroSeason: document.getElementById("heroSeason"),
+    heroStatus: document.getElementById("heroStatus"),
+    prevBtn: document.getElementById("prevBtn"),
+    nextBtn: document.getElementById("nextBtn"),
+    openBtn: document.getElementById("openBtn"),
+    grid: document.getElementById("grid")
+  };
 
-      const sold = p.status !== "available";
-      els.heroStatus.textContent = sold ? "Sold out" : "Available";
-      els.heroStatus.className = "badge " + (sold ? "sold" : "available");
-      els.openBtn.dataset.href = p.href;
+  els.seasonTitle.textContent = season.title;
+  els.seasonSub.textContent = season.subtitle;
+
+  let index = 0;
+  let timer = null;
+  let paused = false;
+
+  function setHero(i, {fade=true} = {}){
+    const p = featured[i];
+    if (!p) return;
+
+    if (fade){
+      els.heroMedia.style.opacity = "0";
+      window.setTimeout(() => applyHero(p), 180);
+      window.setTimeout(() => els.heroMedia.style.opacity = "1", 260);
+    } else {
+      applyHero(p);
     }
+  }
 
-    function next(){
-      index = (index + 1) % featured.length;
-      setHero(index);
-    }
+  function applyHero(p){
+    els.heroFrame.style.setProperty("--heroImage", `url("${p.image}")`);
+    els.heroFrame.style.setProperty("--panFrom", p.panFrom || "42% 50%");
+    els.heroFrame.style.setProperty("--panTo", p.panTo || "58% 50%");
+    els.heroFrame.style.setProperty("--heroPos", p.heroPos || "50% 50%");
 
-    function prev(){
-      index = (index - 1 + featured.length) % featured.length;
-      setHero(index);
-    }
+    els.heroName.textContent = p.name;
+    els.heroSeason.textContent = p.season;
 
-    function openCurrent(){
-      const href = els.openBtn.dataset.href;
-      if (href) window.location.href = href;
-    }
+    const sold = p.status !== "available";
+    els.heroStatus.textContent = sold ? "Sold out" : "Available";
+    els.heroStatus.className = "badge " + (sold ? "sold" : "available");
+    els.openBtn.dataset.href = p.href;
+  }
 
-    function start(){
-      stop();
-      timer = window.setInterval(() => {
-        if (!paused) next();
-      }, 6000);
-    }
+  function next(){
+    index = (index + 1) % featured.length;
+    setHero(index);
+  }
 
-    function stop(){
-      if (timer) window.clearInterval(timer);
-      timer = null;
-    }
+  function prev(){
+    index = (index - 1 + featured.length) % featured.length;
+    setHero(index);
+  }
 
-    function pause(){
-      paused = true;
-    }
+  function openCurrent(){
+    const href = els.openBtn.dataset.href;
+    if (href) window.location.href = href;
+  }
 
-    function resume(){
-      paused = false;
-    }
+  function start(){
+    stop();
+    timer = window.setInterval(() => {
+      if (!paused) next();
+    }, 6000);
+  }
 
-    function renderGrid(){
-      els.grid.innerHTML = "";
-      products.forEach(p => {
-        const item = document.createElement("article");
-        item.className = "item " + (p.status !== "available" ? "sold" : "");
-        item.style.setProperty("--img", `url("${p.image}")`);
+  function stop(){
+    if (timer) window.clearInterval(timer);
+    timer = null;
+  }
 
-        const thumb = document.createElement("div");
-        thumb.className = "thumb";
+  function pause(){
+    paused = true;
+  }
 
-        const scrim = document.createElement("div");
-        scrim.className = "scrim";
+  function resume(){
+    paused = false;
+  }
 
-        const meta = document.createElement("div");
-        meta.className = "meta";
+  function renderGrid(){
+    els.grid.innerHTML = "";
+    products.forEach(p => {
+      const item = document.createElement("article");
+      item.className = "item " + (p.status !== "available" ? "sold" : "");
+      item.style.setProperty("--img", `url("${p.image}")`);
 
-        const h3 = document.createElement("h3");
-        h3.textContent = p.name;
+      const thumb = document.createElement("div");
+      thumb.className = "thumb";
 
-        const badge = document.createElement("div");
-        badge.className = "badge " + (p.status !== "available" ? "sold" : "available");
-        badge.textContent = (p.status !== "available") ? "Sold out" : "Available";
+      const scrim = document.createElement("div");
+      scrim.className = "scrim";
 
-        const hit = document.createElement("a");
-        hit.className = "hit";
-        hit.href = p.href;
-        hit.setAttribute("aria-label", `${p.name} details`);
+      const meta = document.createElement("div");
+      meta.className = "meta";
 
-        meta.appendChild(h3);
-        meta.appendChild(badge);
+      const h3 = document.createElement("h3");
+      h3.textContent = p.name;
 
-        item.appendChild(thumb);
-        item.appendChild(scrim);
-        item.appendChild(meta);
-        item.appendChild(hit);
+      const badge = document.createElement("div");
+      badge.className = "badge " + (p.status !== "available" ? "sold" : "available");
+      badge.textContent = (p.status !== "available") ? "Sold out" : "Available";
 
-        els.grid.appendChild(item);
-      });
-    }
+      const hit = document.createElement("a");
+      hit.className = "hit";
+      hit.href = p.href;
+      hit.setAttribute("aria-label", `${p.name} details`);
 
-    els.infoBtn.addEventListener("click", () => {
-      const open = els.storeInfo.classList.toggle("open");
-      els.infoBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      meta.appendChild(h3);
+      meta.appendChild(badge);
+
+      item.appendChild(thumb);
+      item.appendChild(scrim);
+      item.appendChild(meta);
+      item.appendChild(hit);
+
+      els.grid.appendChild(item);
     });
+  }
 
-    els.prevBtn.addEventListener("click", () => { pause(); prev(); });
-    els.nextBtn.addEventListener("click", () => { pause(); next(); });
-    els.openBtn.addEventListener("click", () => { pause(); openCurrent(); });
+  els.infoBtn.addEventListener("click", () => {
+    const open = els.storeInfo.classList.toggle("open");
+    els.infoBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
 
-    els.hero.addEventListener("mouseenter", pause);
-    els.hero.addEventListener("mouseleave", resume);
+  els.prevBtn.addEventListener("click", () => { pause(); prev(); });
+  els.nextBtn.addEventListener("click", () => { pause(); next(); });
+  els.openBtn.addEventListener("click", () => { pause(); openCurrent(); });
 
-    els.hero.addEventListener("touchstart", pause, {passive:true});
-    els.hero.addEventListener("touchend", resume, {passive:true});
+  els.hero.addEventListener("mouseenter", pause);
+  els.hero.addEventListener("mouseleave", resume);
 
-    renderGrid();
-    setHero(index, {fade:false});
-    start();
-  </script>
+  els.hero.addEventListener("touchstart", pause, {passive:true});
+  els.hero.addEventListener("touchend", resume, {passive:true});
+
+  renderGrid();
+  setHero(index, {fade:false});
+  start();
+</script>
 </body>
 </html>
