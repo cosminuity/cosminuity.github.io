@@ -690,3 +690,67 @@ a:hover{opacity:.92}
     border-radius:14px !important;
   }
 }
+
+@media (max-width: 720px){
+  .heroPoster{
+    height:auto !important;
+    min-height:0 !important;
+  }
+
+  .posterOverlay{
+    align-items:flex-start !important;
+    padding:14px 0 18px !important;
+  }
+
+  /* the big glass box inside the poster */
+  .posterOverlay > :first-child{
+    width:calc(100vw - 24px) !important;
+    max-width:560px !important;
+    margin:0 12px !important;
+    padding:14px !important;
+    border-radius:18px !important;
+
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+
+  /* title */
+  .posterOverlay > :first-child .posterTitle,
+  .posterOverlay > :first-child h1{
+    font-size:40px !important;
+    line-height:1.05 !important;
+    letter-spacing:.02em !important;
+    margin:0 !important;
+  }
+
+  /* body copy */
+  .posterOverlay > :first-child p{
+    font-size:14px !important;
+    line-height:1.45 !important;
+    max-width:36ch !important;
+    margin:0 !important;
+  }
+
+  /* button column becomes stacked */
+  .posterOverlay > :first-child .heroActions,
+  .posterOverlay > :first-child .actions,
+  .posterOverlay > :first-child .btns{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+    width:100% !important;
+  }
+
+  .posterOverlay > :first-child a,
+  .posterOverlay > :first-child a.btn,
+  .posterOverlay > :first-child button{
+    width:100% !important;
+  }
+
+  .posterOverlay > :first-child a.btn,
+  .posterOverlay > :first-child button{
+    padding:12px 14px !important;
+    border-radius:14px !important;
+  }
+}
