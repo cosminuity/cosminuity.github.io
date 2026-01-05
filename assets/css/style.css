@@ -399,50 +399,47 @@ a:hover{opacity:.92}
 }
 
 @media (max-width: 640px){
-  nav, .nav, .site-nav{
-    position: sticky;
+  .nav{
+    position: fixed;
     top: 0;
-    z-index: 50;
+    left: 0;
+    right: 0;
+    z-index: 9999;
   }
 
-  .nav-inner{
+  .navInner{
     padding: 10px 12px;
     gap: 10px;
-    align-items: center;
+    min-width: 0;
   }
 
-  .brand, .nav-brand, .logo{
+  .brand{
     font-size: 14px;
     white-space: nowrap;
     flex: 0 0 auto;
   }
 
-  .nav-links, .nav-right, .nav-menu{
+  .navlinks{
     display: flex;
     gap: 8px;
     flex: 1 1 auto;
+    min-width: 0;
+    justify-content: flex-end;
     overflow-x: auto;
     overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
     white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
 
-  .nav-links::-webkit-scrollbar,
-  .nav-right::-webkit-scrollbar,
-  .nav-menu::-webkit-scrollbar{
+  .navlinks::-webkit-scrollbar{
     display: none;
   }
 
-  .nav-links a, .nav-right a, .nav-menu a{
+  .navlinks a{
     flex: 0 0 auto;
     font-size: 13px;
     padding: 8px 10px;
   }
-
-  .nav-links a.active, .nav-right a.active, .nav-menu a.active{
-    white-space: nowrap;
-  }
 }
-
 
