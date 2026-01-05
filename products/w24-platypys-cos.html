@@ -7,11 +7,9 @@
 
   <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
-  <!-- Shared global styles -->
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="stylesheet" href="../assets/css/theme.css" />
 
-  <!-- Global layout logic -->
   <script src="../assets/js/layout.js" defer></script>
 
   <style>
@@ -153,6 +151,18 @@
 
     .spec span:first-child{color:var(--muted)}
 
+    .cta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:2px;
+    }
+
+    .btn.primary{
+      border-color:rgba(124,92,255,.55);
+      background:rgba(124,92,255,.16);
+    }
+
     @media (max-width:900px){
       .layout{grid-template-columns:1fr}
     }
@@ -191,6 +201,11 @@
           <div class="spec"><span>Season</span><span>Winter 2024</span></div>
           <div class="spec"><span>Variant</span><span>Copys</span></div>
           <div class="spec"><span>Care</span><span>Spot clean only</span></div>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="../archive.html">View archive</a>
+          <a class="btn" href="../store.html">More plushies</a>
         </div>
       </aside>
     </section>
