@@ -398,5 +398,51 @@ a:hover{opacity:.92}
   text-overflow:clip;
 }
 
+@media (max-width: 640px){
+  nav, .nav, .site-nav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .nav-inner{
+    padding: 10px 12px;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .brand, .nav-brand, .logo{
+    font-size: 14px;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .nav-links, .nav-right, .nav-menu{
+    display: flex;
+    gap: 8px;
+    flex: 1 1 auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar,
+  .nav-right::-webkit-scrollbar,
+  .nav-menu::-webkit-scrollbar{
+    display: none;
+  }
+
+  .nav-links a, .nav-right a, .nav-menu a{
+    flex: 0 0 auto;
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .nav-links a.active, .nav-right a.active, .nav-menu a.active{
+    white-space: nowrap;
+  }
+}
 
 
