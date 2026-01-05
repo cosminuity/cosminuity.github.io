@@ -58,7 +58,16 @@ a:hover{opacity:.92}
 .brand{font-weight:700;letter-spacing:.3px}
 
 /* desktop nav */
-.navlinks{display:flex;gap:14px}
+.navlinks{
+  display:flex;
+  gap:14px;
+
+  padding:6px;
+  border-radius:14px;
+
+  background:rgba(124,92,255,.10);
+  border:1px solid rgba(124,92,255,.25);
+}
 
 .navlinks a{
   padding:10px 12px;
@@ -70,8 +79,8 @@ a:hover{opacity:.92}
 .navlinks a.active,
 .navlinks a:hover{
   color:var(--text);
-  border-color:var(--line);
-  background:rgba(255,255,255,.04);
+  border-color:rgba(124,92,255,.45);
+  background:rgba(124,92,255,.22);
 }
 
 /* Hero */
@@ -426,9 +435,12 @@ a:hover{opacity:.92}
     width:100%;
     max-width:calc(100vw - 140px);
     position:relative;
-
     overflow:hidden;
-    background:transparent;
+
+    padding:6px;
+    border-radius:14px;
+    background:rgba(124,92,255,.10);
+    border:1px solid rgba(124,92,255,.25);
   }
 
   .navlinks .navScroll{
@@ -466,14 +478,16 @@ a:hover{opacity:.92}
     z-index:2;
   }
 
+  /* Scroll fade left: purple tinted so it blends with the tab strip */
   .navlinks::before{
     left:0;
-    background:linear-gradient(to right, rgba(10,10,15,.85), rgba(10,10,15,0));
+    background:linear-gradient(to right, rgba(124,92,255,.35), rgba(124,92,255,0));
   }
 
+  /* Scroll fade right: purple tinted so it blends with the tab strip */
   .navlinks::after{
     right:0;
-    background:linear-gradient(to left, rgba(10,10,15,.85), rgba(10,10,15,0));
+    background:linear-gradient(to left, rgba(124,92,255,.35), rgba(124,92,255,0));
   }
 }
 
@@ -577,55 +591,35 @@ a:hover{opacity:.92}
 }
 
 /* =====================
-   Enclosed floating navbar
+   Nav tab strip polish
    Purpose
-   Turn the nav from a full width strip into a contained glass panel
-   Keep the soft side fades but make them feel intentional
+   Make the tabs and scroll fades feel enclosed and match the purple theme
+   Keep the existing full width nav background
 ===================== */
 
-/* Remove the full width gradient strip */
-.nav{
-  background:transparent;
-  backdrop-filter:none;
+/* Scroll fades on desktop too, matching the tab strip color */
+.navlinks{
+  position:relative;
+  overflow:hidden;
 }
 
-/* Create a centered floating shell */
-.navInner{
-  width:min(var(--max), calc(100% - 24px));
-  margin:10px auto 0;
-  padding:12px 14px;
-
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.10);
-
-  background:rgba(18,20,27,.70);
-  backdrop-filter:blur(10px);
-
-  box-shadow:0 14px 40px rgba(0,0,0,.35);
+.navlinks::before,
+.navlinks::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:16px;
+  pointer-events:none;
+  z-index:2;
 }
 
-/* Make the fade edges match the new panel instead of the page */
-@media (max-width:640px){
-  .navInner{
-    width:calc(100% - 16px);
-    margin-top:8px;
-    padding:10px 12px;
-    border-radius:16px;
-  }
+.navlinks::before{
+  left:0;
+  background:linear-gradient(to right, rgba(124,92,255,.35), rgba(124,92,255,0));
+}
 
-  .navlinks::before{
-    background:linear-gradient(
-      to right,
-      rgba(18,20,27,.92),
-      rgba(18,20,27,0)
-    );
-  }
-
-  .navlinks::after{
-    background:linear-gradient(
-      to left,
-      rgba(18,20,27,.92),
-      rgba(18,20,27,0)
-    );
-  }
+.navlinks::after{
+  right:0;
+  background:linear-gradient(to left, rgba(124,92,255,.35), rgba(124,92,255,0));
 }
