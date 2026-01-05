@@ -13,86 +13,327 @@
 
   <!-- Base styles -->
   <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- Global theme overrides -->
   <link rel="stylesheet" href="assets/css/theme.css" />
+
+  <!-- About page enhancements -->
+  <style>
+    .about-hero{
+      position:relative;
+      overflow:hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      padding: 28px;
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(124,92,255,0.18), transparent 60%),
+        radial-gradient(700px 420px at 85% 30%, rgba(255,255,255,0.06), transparent 55%),
+        rgba(0,0,0,0.16);
+    }
+
+    .about-hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: conic-gradient(from 180deg at 50% 50%,
+        rgba(124,92,255,0.0),
+        rgba(124,92,255,0.28),
+        rgba(255,255,255,0.10),
+        rgba(124,92,255,0.0)
+      );
+      filter: blur(18px);
+      opacity: .55;
+      pointer-events:none;
+      animation: glowSpin 14s linear infinite;
+      transform: translateZ(0);
+    }
+
+    @keyframes glowSpin{
+      0%{ transform: rotate(0deg); }
+      100%{ transform: rotate(360deg); }
+    }
+
+    .about-hero > *{ position:relative; }
+
+    .microgrid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .microgrid .card{
+      min-height: 0;
+      height: 100%;
+    }
+
+    .span-6{ grid-column: span 6; }
+    .span-4{ grid-column: span 4; }
+    .span-8{ grid-column: span 8; }
+    .span-12{ grid-column: span 12; }
+
+    @media (max-width: 860px){
+      .span-6,.span-4,.span-8{ grid-column: span 12; }
+      .about-hero{ padding: 22px; }
+    }
+
+    .chiprow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 12px;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      font-size: 13px;
+      letter-spacing: .01em;
+      user-select:none;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .chip:hover{
+      transform: translateY(-1px);
+      background: rgba(124,92,255,.10);
+      border-color: rgba(124,92,255,.28);
+    }
+
+    .links{
+      display:grid;
+      gap:8px;
+      margin-top: 10px;
+    }
+
+    .links a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      text-decoration:none;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .links a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.04);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .links a span{
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .accordion{
+      display:grid;
+      gap: 12px;
+    }
+
+    details.accordion-item{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+      transform: translateZ(0);
+    }
+
+    details.accordion-item summary{
+      cursor:pointer;
+      list-style:none;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      font-family: "Space Grotesk", ui-sans-serif, system-ui;
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+
+    details.accordion-item summary::-webkit-details-marker{ display:none; }
+
+    .chev{
+      width: 12px;
+      height: 12px;
+      border-right: 2px solid rgba(255,255,255,.55);
+      border-bottom: 2px solid rgba(255,255,255,.55);
+      transform: rotate(45deg);
+      transition: transform .18s ease;
+      flex: 0 0 auto;
+      opacity: .9;
+    }
+
+    details[open] .chev{
+      transform: rotate(225deg);
+    }
+
+    .accordion-body{
+      padding: 0 16px 16px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .accordion-body p{ margin: 10px 0 0; color: rgba(233,233,239,.92); }
+    .accordion-body .muted{ color: var(--muted); }
+
+    .reveal{
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .45s ease, transform .45s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.in{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .about-hero::before{ animation: none; }
+      .chip, .links a, .reveal{ transition: none; }
+      .reveal{ opacity: 1; transform:none; }
+    }
+  </style>
 </head>
 
 <body data-page="about">
-
   <div id="siteNav"></div>
 
   <div class="container">
-    <main class="hero">
-      <div class="kicker">About</div>
-      <div class="h1">Who I is.</div>
+    <main class="hero about-hero">
+      <div class="kicker reveal">About</div>
+      <div class="h1 reveal">London Sawada</div>
 
-      <p class="lead">
-        My name is London Sawada. I’m currently in school for nursing, previously served in the Navy, and am definitely not the greatest artist of all time. This started because I didn’t know how to flirt, so I learned how to draw instead. I was born in Pocono Mountain, Pennsylvania, grew up between there and Japan, and now study in North Carolina. Cosminuity is an alias I made when I was younger that stuck as the label behind my art and animation. I’m taking my time building a story, figuring things out as I go.
+      <p class="lead reveal">
+        I’m London. I’m in school for nursing, I served in the Navy, and I’m still building my art brain in public.
+        This whole thing started because I did not know how to flirt, so I learned how to draw instead.
+        I was born in Pocono Mountain, Pennsylvania, grew up between there and Japan, and now I’m in North Carolina.
+        Cosminuity is an old alias that stuck, so it became the label for my art and animation.
+        I’m taking my time and letting the story show up when it is ready.
       </p>
 
-      <div class="grid">
-        <div class="card">
+      <div class="chiprow reveal" aria-label="Quick facts">
+        <div class="chip">Character design</div>
+        <div class="chip">World sketches</div>
+        <div class="chip">Animation experiments</div>
+        <div class="chip">Slow story building</div>
+      </div>
+
+      <div class="microgrid">
+        <div class="card span-6 reveal">
           <h3>What I do</h3>
-          <p>I design characters, sketch worlds, experiment with animation, and slowly try to make everything connect.</p>
+          <p>I design characters, sketch worlds, and test ideas in motion until something clicks.</p>
         </div>
 
-        <div class="card">
+        <div class="card span-6 reveal">
           <h3>Tools</h3>
-          <p>I work digitally using Clip Studio, Photoshop, and the Flipaclip app. Sketch first, figure it out later.</p>
+          <p>Clip Studio, Photoshop, and Flipaclip. Sketch first. Decide what it means later.</p>
         </div>
 
-        <div class="card">
-          <h3>Contact</h3>
-          <p>
-            Email: Cosminuity@gmail.com<br />
-            Instagram: @cosminuity<br />
-            TikTok: @cosminuity<br />
-            YouTube: Cosminuity
-          </p>
+        <div class="card span-8 reveal">
+          <h3>Where to find me</h3>
+          <div class="links">
+            <a href="mailto:Cosminuity@gmail.com" aria-label="Email Cosminuity">
+              <strong>Email</strong><span>Cosminuity@gmail.com</span>
+            </a>
+            <a href="https://www.tiktok.com/@cosminuity" target="_blank" rel="noopener">
+              <strong>TikTok</strong><span>@cosminuity</span>
+            </a>
+            <a href="https://www.instagram.com/cosminuity" target="_blank" rel="noopener">
+              <strong>Instagram</strong><span>@cosminuity</span>
+            </a>
+            <a href="https://www.youtube.com/@Cosminuity" target="_blank" rel="noopener">
+              <strong>YouTube</strong><span>Cosminuity</span>
+            </a>
+          </div>
         </div>
 
-        <div class="card">
+        <div class="card span-4 reveal">
           <h3>Availability</h3>
-          <p>Not taking commissions. Still learning, still building.</p>
+          <p>Not taking commissions right now. Still learning, still building.</p>
         </div>
       </div>
     </main>
 
     <section class="stack">
-      <div class="card">
-        <h3>How this started</h3>
-        <p>
-          This started the way most bad ideas start. I drew something once, got a little encouragement, and kept going. There was no plan and still isn’t one. Cosminuity just became the place where all my unfinished ideas ended up living.
-        </p>
-      </div>
+      <div class="accordion">
+        <details class="accordion-item reveal">
+          <summary>
+            How this started
+            <i class="chev" aria-hidden="true"></i>
+          </summary>
+          <div class="accordion-body">
+            <p>
+              This started the way most bad ideas start. I drew something once, got a little encouragement, and kept going.
+              There was no plan, and there still is not one. Cosminuity became the place where all the unfinished ideas live.
+            </p>
+          </div>
+        </details>
 
-      <div class="card">
-        <h3>What I care about</h3>
-        <p>
-          I care more about personality than perfection. If something feels alive, a little weird, or slightly uncomfortable in a good way, I’m interested. Clean art is nice. Memorable art is better.
-        </p>
-      </div>
+        <details class="accordion-item reveal">
+          <summary>
+            What I care about
+            <i class="chev" aria-hidden="true"></i>
+          </summary>
+          <div class="accordion-body">
+            <p>
+              Personality over perfection. If something feels alive, a little weird, or slightly uncomfortable in a good way, I’m interested.
+              Clean art is nice. Memorable art is better.
+            </p>
+          </div>
+        </details>
 
-      <div class="card">
-        <h3>What I’m working on</h3>
-        <p>
-          I’m trying to build a story without forcing it. Characters come first, then settings, then maybe a plot if I’m lucky. Most of the time I’m just figuring out who these characters are and why they exist.
-        </p>
-      </div>
+        <details class="accordion-item reveal">
+          <summary>
+            What I’m working on
+            <i class="chev" aria-hidden="true"></i>
+          </summary>
+          <div class="accordion-body">
+            <p>
+              I’m building a story without forcing it. Characters come first, then settings, then maybe a plot if I get lucky.
+              Most days I’m just figuring out who these people are and why they exist.
+            </p>
+            <p class="muted">
+              I treat progress like a weekly habit, not a single big moment.
+            </p>
+          </div>
+        </details>
 
-      <div class="card">
-        <h3>Why animation</h3>
-        <p>
-          Animation keeps me honest. If a design only works in one still frame, it usually falls apart the second it moves. Motion exposes bad ideas very quickly, which is painful but useful.
-        </p>
-      </div>
+        <details class="accordion-item reveal">
+          <summary>
+            Why animation
+            <i class="chev" aria-hidden="true"></i>
+          </summary>
+          <div class="accordion-body">
+            <p>
+              Animation keeps me honest. If a design only works in one still frame, it usually falls apart the second it moves.
+              Motion exposes weak ideas fast, which is painful but useful.
+            </p>
+          </div>
+        </details>
 
-      <div class="card">
-        <h3>Where this is going</h3>
-        <p>
-          I don’t have a roadmap or a master plan. I’m aiming for steady progress, better decisions, and fewer abandoned folders. If this turns into something bigger, great. If not, I’m still learning a lot.
-        </p>
+        <details class="accordion-item reveal">
+          <summary>
+            Where this is going
+            <i class="chev" aria-hidden="true"></i>
+          </summary>
+          <div class="accordion-body">
+            <p>
+              No roadmap. I’m aiming for steady progress, better decisions, and fewer abandoned folders.
+              If it grows into something bigger, cool. If not, I still win because I’m improving.
+            </p>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -101,5 +342,34 @@
 
   <script src="assets/js/layout.js"></script>
 
+  <script>
+    (function () {
+      const items = Array.from(document.querySelectorAll(".reveal"));
+      if (!("IntersectionObserver" in window)) {
+        items.forEach(el => el.classList.add("in"));
+        return;
+      }
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.12 });
+
+      items.forEach(el => io.observe(el));
+
+      const accordions = Array.from(document.querySelectorAll("details.accordion-item"));
+      accordions.forEach(d => {
+        d.addEventListener("toggle", () => {
+          if (!d.open) return;
+          accordions.forEach(other => {
+            if (other !== d) other.open = false;
+          });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
