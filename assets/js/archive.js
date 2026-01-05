@@ -73,4 +73,18 @@ document.addEventListener("DOMContentLoaded", () => {
       if (sort === "new") items.reverse()
     }
 
-    grid.inner
+    grid.innerHTML = ""
+    items.forEach(p => grid.appendChild(card(p)))
+
+    console.log("Archive rendered", items.length)
+  }
+
+  buildSeasonOptions()
+
+  q.addEventListener("input", apply)
+  seasonSel.addEventListener("change", apply)
+  statusSel.addEventListener("change", apply)
+  sortSel.addEventListener("change", apply)
+
+  apply()
+})
