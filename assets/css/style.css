@@ -382,16 +382,8 @@ a:hover{opacity:.92}
   /* show hint text on desktop */
   .sold-hint{display:inline}
 
-  /* default closed state */
-  .sold-details:not([open]) .sold-drawer{
-    opacity:0;
-    transform:translateY(6px);
-    max-height:0;
-    overflow:hidden;
-  }
-
   /* hover preview only when NOT open */
-  .sold-card:hover .sold-details:not([open]) .sold-drawer{
+  .sold-details:not([open]):hover .sold-drawer{
     opacity:1;
     transform:translateY(0);
     max-height:220px;
