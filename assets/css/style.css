@@ -20,7 +20,7 @@ body{
     var(--bg);
   color:var(--text);
   line-height:1.5;
-  padding-top:76px;
+  padding-top:68px;
 }
 
 a{color:inherit;text-decoration:none}
@@ -39,48 +39,108 @@ a:hover{opacity:.92}
   z-index:9999;
   background:linear-gradient(
     to bottom,
-    rgba(10,10,15,.85),
-    rgba(10,10,15,.45),
-    rgba(10,10,15,0)
+    rgba(0,0,0,.72),
+    rgba(0,0,0,.40),
+    rgba(0,0,0,0)
   );
-  backdrop-filter:blur(6px);
+  backdrop-filter:blur(8px);
 }
 
 .navInner{
   max-width:var(--max);
   margin:0 auto;
-  padding:18px;
+  padding:14px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:14px;
 }
 
-.brand{font-weight:700;letter-spacing:.3px}
+/* brand sits outside the capsule */
+.brand{
+  font-weight:750;
+  letter-spacing:.3px;
+  font-size:14px;
+  color:rgba(255,255,255,.92);
+  white-space:nowrap;
+  flex:0 0 auto;
+}
 
-/* desktop nav */
+/* desktop tab capsule */
 .navlinks{
+  position:relative;
   display:flex;
-  gap:14px;
+  gap:10px;
 
-  padding:6px;
-  border-radius:14px;
+  padding:4px;
+  border-radius:999px;
 
-  background:rgba(124,92,255,.10);
-  border:1px solid rgba(124,92,255,.25);
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.10),
+    rgba(255,255,255,.04)
+  );
+  border:1px solid rgba(255,255,255,.16);
+
+  overflow:hidden;
 }
 
 .navlinks a{
-  padding:10px 12px;
-  border-radius:12px;
+  padding:8px 12px;
+  border-radius:999px;
   border:1px solid transparent;
-  color:var(--muted);
+  color:rgba(255,255,255,.68);
+  font-size:13px;
+  line-height:1;
+  transition:background .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 
 .navlinks a.active,
 .navlinks a:hover{
-  color:var(--text);
-  border-color:rgba(124,92,255,.45);
-  background:rgba(124,92,255,.22);
+  color:rgba(255,255,255,.95);
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.18);
+  box-shadow: inset 0 -2px 0 rgba(255,255,255,.22);
+}
+
+/* optional scroll structure support */
+.navlinks .navScroll{
+  overflow-x:auto;
+  overflow-y:hidden;
+  white-space:nowrap;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  touch-action:pan-x;
+}
+
+.navlinks .navScroll::-webkit-scrollbar{display:none}
+
+.navlinks .navRow{
+  display:inline-flex;
+  gap:10px;
+  min-width:max-content;
+}
+
+/* scroll fades, monochrome */
+.navlinks::before,
+.navlinks::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:16px;
+  pointer-events:none;
+  z-index:2;
+}
+
+.navlinks::before{
+  left:0;
+  background:linear-gradient(to right, rgba(18,20,27,.95), rgba(18,20,27,0));
+}
+
+.navlinks::after{
+  right:0;
+  background:linear-gradient(to left, rgba(18,20,27,.95), rgba(18,20,27,0));
 }
 
 /* Hero */
@@ -404,90 +464,38 @@ a:hover{opacity:.92}
   text-overflow:clip;
 }
 
-/* Nav mobile FIX */
+/* Nav mobile */
 @media (max-width: 640px){
-  body{padding-top:64px}
-
-  .nav{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:9999;
-  }
+  body{padding-top:60px}
 
   .navInner{
     padding:10px 12px;
-    gap:12px;
+    gap:10px;
     min-width:0;
     justify-content:flex-start;
   }
 
   .brand{
-    font-size:14px;
-    white-space:nowrap;
-    flex:0 0 auto;
+    font-size:13px;
   }
 
   .navlinks{
     flex:1 1 auto;
     min-width:0;
     width:100%;
-    max-width:calc(100vw - 140px);
-    position:relative;
-    overflow:hidden;
-
-    padding:6px;
-    border-radius:14px;
-    background:rgba(124,92,255,.10);
-    border:1px solid rgba(124,92,255,.25);
-  }
-
-  .navlinks .navScroll{
-    overflow-x:auto;
-    overflow-y:hidden;
-    white-space:nowrap;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    touch-action:pan-x;
-    padding-bottom:2px;
-  }
-
-  .navlinks .navScroll::-webkit-scrollbar{display:none}
-
-  .navlinks .navRow{
-    display:inline-flex;
-    gap:8px;
-    min-width:max-content;
+    max-width:calc(100vw - 132px);
+    padding:4px;
+    border-radius:999px;
   }
 
   .navlinks a{
-    flex:0 0 auto;
-    font-size:13px;
+    font-size:12.5px;
     padding:8px 10px;
   }
 
   .navlinks::before,
   .navlinks::after{
-    content:"";
-    position:absolute;
-    top:0;
-    bottom:0;
     width:14px;
-    pointer-events:none;
-    z-index:2;
-  }
-
-  /* Scroll fade left: purple tinted so it blends with the tab strip */
-  .navlinks::before{
-    left:0;
-    background:linear-gradient(to right, rgba(124,92,255,.35), rgba(124,92,255,0));
-  }
-
-  /* Scroll fade right: purple tinted so it blends with the tab strip */
-  .navlinks::after{
-    right:0;
-    background:linear-gradient(to left, rgba(124,92,255,.35), rgba(124,92,255,0));
   }
 }
 
@@ -588,38 +596,4 @@ a:hover{opacity:.92}
   .archiveControls{
     grid-template-columns:1fr 1fr;
   }
-}
-
-/* =====================
-   Nav tab strip polish
-   Purpose
-   Make the tabs and scroll fades feel enclosed and match the purple theme
-   Keep the existing full width nav background
-===================== */
-
-/* Scroll fades on desktop too, matching the tab strip color */
-.navlinks{
-  position:relative;
-  overflow:hidden;
-}
-
-.navlinks::before,
-.navlinks::after{
-  content:"";
-  position:absolute;
-  top:0;
-  bottom:0;
-  width:16px;
-  pointer-events:none;
-  z-index:2;
-}
-
-.navlinks::before{
-  left:0;
-  background:linear-gradient(to right, rgba(124,92,255,.35), rgba(124,92,255,0));
-}
-
-.navlinks::after{
-  right:0;
-  background:linear-gradient(to left, rgba(124,92,255,.35), rgba(124,92,255,0));
 }
