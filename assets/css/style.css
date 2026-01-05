@@ -321,11 +321,45 @@ a:hover{opacity:.92}
 /* mobile */
 @media (max-width:600px){
   .sold-card--bg{aspect-ratio:4/3}
-
-  @media (hover:hover){
-  .sold-summary{ pointer-events:none }
-}
-
   .sold-row{grid-template-columns:78px 1fr}
   .sold-card--bg .sold-panel{padding:10px}
+}
+
+/* desktop only: prevent summary stealing hover focus */
+@media (hover:hover){
+  .sold-summary{pointer-events:none}
+}
+
+/* mobile only: show tap hint */
+@media (hover:none) and (pointer:coarse){
+  .sold-summary{
+    position:relative;
+    padding-right:86px;
+  }
+
+  .sold-summary::after{
+    content:"Tap to expand";
+    position:absolute;
+    right:0;
+    top:0;
+    font-size:11px;
+    color:var(--muted);
+    opacity:.9;
+  }
+
+  .sold-details[open] .sold-summary::after{
+    content:"Tap to close";
+  }
+
+  .sold-summary::before{
+    content:"▾";
+    position:absolute;
+    right:74px;
+    top:0;
+    opacity:.8;
+  }
+
+  .sold-details[open] .sold-summary::before{
+    content:"▴";
+  }
 }
