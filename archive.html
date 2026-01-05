@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Archive</title>
+
+  <link rel="icon" href="logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-page="archive" data-hero-title="Archive" data-hero-bg="">
+  <div id="siteNav"></div>
+  <header id="siteHero" class="hero"></header>
+
+  <main class="wrap">
+    <section class="panel">
+      <div class="archiveControls">
+        <input id="q" class="input" type="search" placeholder="Search…" autocomplete="off" />
+
+        <select id="season" class="input">
+          <option value="">All seasons</option>
+        </select>
+
+        <select id="status" class="input">
+          <option value="">All status</option>
+          <option value="sold">Sold</option>
+          <option value="available">Available</option>
+          <option value="draft">Draft</option>
+        </select>
+
+        <select id="sort" class="input">
+          <option value="new">Newest</option>
+          <option value="old">Oldest</option>
+          <option value="name">Name</option>
+        </select>
+      </div>
+
+      <div id="grid" class="sold-grid"></div>
+    </section>
+  </main>
+
+  <script src="site.js"></script>
+  <script>
+    const products = window.products || [];
+
+    const $q = document.getElementById("q");
+    const $season = document.getElementById("season");
+    const $status = document.getElementById("status");
+    const $sort = document.getElementById("sort");
+    const $grid = document.getElementById("grid");
+
+    function uniqSeasons(items){
+      return Array.from(new Set(items.map(p => p.season).filter(Boolean))).sort();
+    }
+
+    function renderSeasonOptions(){
+      const seasons = uniqSeasons(products);
+      seasons.forEach(s => {
+        const opt = document.createElement("option");
+        opt.value = s;
+        opt.textContent = s;
+        $season.appendChild(opt);
+      });
+    }
+
+    function scoreSeason(season){
+      const m = String(season || "").match(/(spring|summer|fall|winter)\s+(\d{4})/i);
+      if (!m) return 0;
+      const term = m[1].toLowerCase();
+      const year = Number(m[2]);
+      const termRank = { spring: 1, summer: 2, fall: 3, winter: 4 }[term] || 0;
+      return year * 10 + termRank;
+    }
+
+    function card(p){
+      const a = document.createElement("a");
+      a.className = "sold-card sold-card--bg";
+      a.href = p.href || "#";
+      a.style.backgroundImage = `url(${p.image || ""})`;
+      if (p.heroPos) a.style.backgroundPosition = p.heroPos;
+
+      const meta = document.createElement("div");
+      meta.className = "sold-meta";
+      meta.innerHTML = `
+        <div class="sold-name">${p.name || ""}</div>
+        <div class="sold-sub">${p.season || ""} · ${p.status || ""}</div>
+      `;
+
+      a.appendChild(meta);
+      return a;
+    }
+
+    function apply(){
+      const q = ($q.value || "").trim().toLowerCase();
+      const season = $season.value;
+      const status = $status.value;
+      const sort = $sort.value;
+
+      let items = products.slice();
+
+      if (q){
+        items = items.filter(p => {
+          const hay = `${p.name || ""} ${p.id || ""} ${p.season || ""} ${p.status || ""}`.toLowerCase();
+          return hay.includes(q);
+        });
+      }
+
+      if (season) items = items.filter(p => p.season === season);
+      if (status) items = items.filter(p => p.status === status);
+
+      if (sort === "name"){
+        items.sort((a,b) => String(a.name||"").localeCompare(String(b.name||"")));
+      } else {
+        items.sort((a,b) => scoreSeason(a.season) - scoreSeason(b.season));
+        if (sort === "new") items.reverse();
+      }
+
+      $grid.innerHTML = "";
+      items.forEach(p => $grid.appendChild(card(p)));
+    }
+
+    renderSeasonOptions();
+    ["input","change"].forEach(evt => {
+      $q.addEventListener(evt, apply);
+      $season.addEventListener(evt, apply);
+      $status.addEventListener(evt, apply);
+      $sort.addEventListener(evt, apply);
+    });
+
+    apply();
+  </script>
+</body>
+</html>
