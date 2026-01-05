@@ -7,6 +7,13 @@
 
   <link rel="icon" type="image/png" href="/assets/images/favicon.png">
 
+  <!-- Shared global styles -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/theme.css" />
+
+  <!-- Global layout logic -->
+  <script src="../assets/js/layout.js" defer></script>
+
   <style>
     :root{
       --bg:#0b0c10;
@@ -21,14 +28,15 @@
 
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
+
     body{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family: var(--font-body);
+      line-height: var(--line-body);
       background:
         radial-gradient(1200px 800px at 15% 10%, rgba(124,92,255,0.18), transparent 60%),
         radial-gradient(900px 700px at 85% 25%, rgba(255,255,255,0.07), transparent 55%),
         var(--bg);
       color:var(--text);
-      line-height:1.45;
     }
 
     a{color:inherit;text-decoration:none}
@@ -151,14 +159,21 @@
   </style>
 </head>
 
-<body>
+<body data-page="store" data-hero-title="PLUSH DETAILS">
+  <div id="siteNav"></div>
+  <div id="siteHero"></div>
+
   <main class="wrap">
     <div class="topbar">
       <a class="btn" href="../store.html">Back</a>
     </div>
 
     <section class="layout">
-      <div class="media card" style="--img:url('../assets/images/store/w24-platypys-cos.jpg')" aria-label="Copys plush photo"></div>
+      <div
+        class="media card"
+        style="--img:url('../assets/images/store/w24-platypys-cos.jpg')"
+        aria-label="Copys plush photo">
+      </div>
 
       <aside class="card panel">
         <header>
