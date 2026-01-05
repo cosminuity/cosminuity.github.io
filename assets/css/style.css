@@ -575,3 +575,57 @@ a:hover{opacity:.92}
     grid-template-columns:1fr 1fr;
   }
 }
+
+/* =====================
+   Enclosed floating navbar
+   Purpose
+   Turn the nav from a full width strip into a contained glass panel
+   Keep the soft side fades but make them feel intentional
+===================== */
+
+/* Remove the full width gradient strip */
+.nav{
+  background:transparent;
+  backdrop-filter:none;
+}
+
+/* Create a centered floating shell */
+.navInner{
+  width:min(var(--max), calc(100% - 24px));
+  margin:10px auto 0;
+  padding:12px 14px;
+
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
+
+  background:rgba(18,20,27,.70);
+  backdrop-filter:blur(10px);
+
+  box-shadow:0 14px 40px rgba(0,0,0,.35);
+}
+
+/* Make the fade edges match the new panel instead of the page */
+@media (max-width:640px){
+  .navInner{
+    width:calc(100% - 16px);
+    margin-top:8px;
+    padding:10px 12px;
+    border-radius:16px;
+  }
+
+  .navlinks::before{
+    background:linear-gradient(
+      to right,
+      rgba(18,20,27,.92),
+      rgba(18,20,27,0)
+    );
+  }
+
+  .navlinks::after{
+    background:linear-gradient(
+      to left,
+      rgba(18,20,27,.92),
+      rgba(18,20,27,0)
+    );
+  }
+}
