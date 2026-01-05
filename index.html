@@ -16,8 +16,8 @@
   <style>
     .homeWrap{padding:18px 0 44px}
 
-    /* KEEP HERO.JPG */
-    .heroPoster{
+    /* INDEX ONLY: keep banner look but do not change global hero system */
+    body[data-page="home"] .heroPoster{
       position:relative;
       overflow:hidden;
       border-bottom:1px solid var(--line);
@@ -28,7 +28,7 @@
       background:url("assets/images/hero.jpg") center/cover no-repeat;
     }
 
-    .heroPoster::after{
+    body[data-page="home"] .heroPoster::after{
       content:"";
       position:absolute;
       inset:0;
@@ -36,9 +36,20 @@
       pointer-events:none;
     }
 
-    .posterOverlay{
-      position:relative;
+    /* KEEP .posterOverlay as the universal overlay layer.
+       Put the glass layout in .posterGlass so other pages are never affected. */
+    body[data-page="home"] .heroPoster .posterOverlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 0 16px;
+      background: none;
       z-index:2;
+    }
+
+    body[data-page="home"] .posterGlass{
       width:min(1080px, calc(100% - 32px));
       padding: 26px 22px;
       border:1px solid rgba(255,255,255,.10);
@@ -56,7 +67,7 @@
     .posterLeft{min-width:0}
     .posterRight{min-width:0; display:grid; gap:12px; justify-items:start}
 
-    .posterTitle{
+    body[data-page="home"] .posterGlass .posterTitle{
       margin:0;
       font-family:"Space Grotesk", ui-sans-serif, system-ui;
       font-weight:700;
@@ -247,7 +258,6 @@
     .row strong{font-size:13px}
     .smallLink{font-size:13px;color:var(--text);text-decoration:none}
 
-    /* SCROLL REVEAL */
     .reveal{
       opacity:0;
       transform: translateY(12px);
@@ -260,7 +270,6 @@
       transform: translateY(0);
     }
 
-    /* SUB BOX HOVER POLISH */
     .homeHero,
     .card,
     .preview{
@@ -306,28 +315,31 @@
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
       .homeTitle{font-size:24px}
-      .heroPoster{min-height:42vh;height:auto}
-      .posterOverlay{grid-template-columns:1fr}
+      body[data-page="home"] .heroPoster{min-height:42vh;height:auto}
+      body[data-page="home"] .posterGlass{grid-template-columns:1fr}
       .posterRight{justify-items:start}
     }
 
-    /* MOBILE HERO FIX + CENTERING OF LOWER BOXES */
     @media (max-width: 720px){
-      .heroPoster{
+      body[data-page="home"] .heroPoster{
         min-height:0;
         height:auto;
         place-items:start center;
         padding:16px 0 22px;
       }
 
-      .posterOverlay{
-        width: min(560px, calc(100% - 40px));
+      body[data-page="home"] .heroPoster .posterOverlay{
+        padding: 0 12px;
+      }
+
+      body[data-page="home"] .posterGlass{
+        width: min(560px, calc(100% - 24px));
         margin: 0 auto;
         padding:14px;
         gap:12px;
       }
 
-      .posterTitle{
+      body[data-page="home"] .posterGlass .posterTitle{
         letter-spacing:.06em;
         font-size: clamp(32px, 10vw, 44px);
       }
@@ -357,7 +369,6 @@
         border-radius:14px;
       }
 
-      /* Center and slightly shrink the content boxes below */
       .container{
         padding-left:14px;
         padding-right:14px;
@@ -403,18 +414,20 @@
   <div id="siteNav"></div>
 
   <header class="heroPoster" id="heroPoster">
-    <div class="posterOverlay reveal">
-      <div class="posterLeft">
-        <h1 class="posterTitle">COSMINUITY</h1>
-      </div>
+    <div class="posterOverlay">
+      <div class="posterGlass reveal">
+        <div class="posterLeft">
+          <h1 class="posterTitle">COSMINUITY</h1>
+        </div>
 
-      <div class="posterRight">
-        <p class="posterKicker">
-          Animations, art, plush drops, and ideas. A small run character project, plus the home of the Platypys.
-        </p>
-        <div class="homeCtas posterCtas">
-          <a class="btn primary" href="archive.html">View the Plush Archive</a>
-          <a class="btn" href="store.html">Visit the Store</a>
+        <div class="posterRight">
+          <p class="posterKicker">
+            Animations, art, plush drops, and ideas. A small run character project, plus the home of the Platypys.
+          </p>
+          <div class="homeCtas posterCtas">
+            <a class="btn primary" href="archive.html">View the Plush Archive</a>
+            <a class="btn" href="store.html">Visit the Store</a>
+          </div>
         </div>
       </div>
     </div>
