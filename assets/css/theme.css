@@ -45,3 +45,18 @@ body{
   font-family: var(--font-heading);
   letter-spacing: .04em;
 }
+
+.footerLinks{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  margin-bottom:6px;
+}
+.footerLinks a{
+  font-size:13px;
+  color:var(--muted);
+  text-decoration:none;
+}
+.footerLinks a:hover{
+  color:var(--text);
+}
