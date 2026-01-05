@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Store</title>
+
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#12141b;
+      --text:#e9e9ef;
+      --muted:#a8a8b6;
+      --line:rgba(255,255,255,.10);
+      --accent:#7c5cff;
+      --radius:16px;
+      --max:1080px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(124,92,255,0.18), transparent 60%),
+        radial-gradient(900px 700px at 85% 25%, rgba(255,255,255,0.07), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px 16px 56px}
+    .card{
+      border:1px solid var(--line);
+      background:rgba(18,20,27,.72);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+
+    .top{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .banner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 14px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg, rgba(124,92,255,.12), rgba(255,255,255,.04));
+      border-radius:var(--radius);
+    }
+    .banner strong{font-weight:650}
+    .banner .meta{color:var(--muted); font-size:13px}
+    .banner .actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 12px;
+      font:inherit;
+      cursor:pointer;
+    }
+    .btn:focus{outline:2px solid rgba(124,92,255,.55); outline-offset:2px}
+    .btn.primary{
+      border-color:rgba(124,92,255,.55);
+      background:rgba(124,92,255,.16);
+    }
+
+    .info{
+      display:none;
+      padding:12px 14px 14px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(0,0,0,.18);
+    }
+    .info.open{display:block}
+    .info p{margin:8px 0; color:var(--muted)}
+    .info p strong{color:var(--text)}
+    .info a{color:var(--text); text-decoration:underline; text-decoration-color:rgba(255,255,255,.25)}
+
+    .season{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:12px;
+      margin:18px 0 12px;
+    }
+    .season h2{margin:0; font-size:18px; letter-spacing:.01em}
+    .season .season-sub{color:var(--muted); font-size:13px}
+
+    .hero{
+      position:relative;
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:#000;
+    }
+
+    .hero-frame{
+      position:relative;
+      min-height: 420px;
+    }
+
+    .hero-media{
+      position:absolute;
+      inset:0;
+      background-image: var(--heroImage);
+      background-size: cover;
+      background-position: var(--heroPos, 50% 50%);
+      transform: scale(1.02);
+      filter: saturate(1.02) contrast(1.02);
+      animation: heroPan 10s linear infinite;
+      opacity:1;
+      transition: opacity 500ms ease;
+    }
+
+    @keyframes heroPan{
+      0%   { background-position: var(--panFrom, 42% 50%); }
+      100% { background-position: var(--panTo,   58% 50%); }
+    }
+
+    .hero-scrim{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 600px at 20% 30%, rgba(0,0,0,.10), transparent 60%),
+        linear-gradient(to top, rgba(0,0,0,.66), rgba(0,0,0,.12) 55%, rgba(0,0,0,.00));
+      pointer-events:none;
+    }
+
+    .hero-overlay{
+      position:absolute;
+      left:16px;
+      right:16px;
+      bottom:14px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .hero-text{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width: 0;
+    }
+    .hero-title{
+      margin:0;
+      font-size:20px;
+      font-weight:700;
+      letter-spacing:.01em;
+      text-shadow: 0 8px 20px rgba(0,0,0,.55);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .hero-sub{
+      color:rgba(233,233,239,.85);
+      font-size:13px;
+      text-shadow: 0 8px 20px rgba(0,0,0,.55);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(0,0,0,.32);
+      color:rgba(233,233,239,.92);
+      font-size:12px;
+      backdrop-filter: blur(10px);
+      white-space:nowrap;
+    }
+    .badge.sold{
+      color:rgba(233,233,239,.80);
+      border-color: rgba(255,255,255,.14);
+      background:rgba(0,0,0,.36);
+    }
+    .badge.available{
+      border-color: rgba(124,92,255,.55);
+      background: rgba(124,92,255,.18);
+    }
+
+    .hero-hit{
+      position:absolute;
+      inset:0;
+      display:grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      z-index:3;
+    }
+    .zone{
+      cursor:pointer;
+      background:transparent;
+      border:0;
+      padding:0;
+      color:transparent;
+    }
+    .zone:focus{outline:2px solid rgba(124,92,255,.55); outline-offset:-2px}
+    .zone.center{cursor:pointer}
+
+    .hint{
+      position:absolute;
+      top:12px;
+      right:12px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      z-index:4;
+      pointer-events:none;
+      opacity:.0;
+      transition: opacity 200ms ease;
+    }
+    .hero:hover .hint{opacity:.85}
+    .hint span{
+      font-size:12px;
+      color:rgba(233,233,239,.85);
+      background:rgba(0,0,0,.28);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:999px;
+      padding:6px 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    .grid{
+      display:grid;
+      gap:14px;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top:14px;
+    }
+
+    .item{
+      position:relative;
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      min-height: 0;
+      aspect-ratio: 1 / 1;
+    }
+    .item .thumb{
+      position:absolute;
+      inset:0;
+      background-image: var(--img);
+      background-size: cover;
+      background-position: 50% 50%;
+      transform: scale(1.02);
+      filter: saturate(1.02) contrast(1.02);
+    }
+    .item .scrim{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,.0) 55%);
+    }
+    .item .meta{
+      position:absolute;
+      left:12px;
+      right:12px;
+      bottom:10px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .item h3{
+      margin:0;
+      font-size:13px;
+      font-weight:650;
+      text-shadow: 0 8px 20px rgba(0,0,0,.55);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 100%;
+    }
+
+    .item .hit{
+      position:absolute;
+      inset:0;
+      z-index:3;
+    }
+
+    .item.sold .thumb{filter: saturate(.85) contrast(1.0) brightness(.92)}
+    .item.sold::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,.18);
+      z-index:2;
+    }
+
+    .footer-note{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    @media (max-width: 980px){
+      .grid{grid-template-columns: repeat(3, 1fr)}
+      .hero-frame{min-height: 380px}
+    }
+    @media (max-width: 720px){
+      .grid{grid-template-columns: repeat(2, 1fr)}
+      .hero-frame{min-height: 520px}
+      .hint{display:none}
+      .hero-hit{grid-template-columns: 1fr 1fr 1fr}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .hero-media{animation:none}
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="top">
+      <div class="banner">
+        <div>
+          <div><strong>Announcement</strong> <span class="meta" id="announceMeta">Winter 2024 drop has ended.</span></div>
+          <div class="meta" id="announceSub">Next seasonal drop date will be posted here.</div>
+        </div>
+        <div class="actions">
+          <button class="btn" id="infoBtn" type="button" aria-expanded="false" aria-controls="storeInfo">How drops work</button>
+          <a class="btn primary" href="archive.html" aria-label="Open archive">Archive</a>
+        </div>
+      </div>
+
+      <div class="info" id="storeInfo">
+        <p><strong>Seasonal drops only.</strong> Each season is a limited run. When the window closes, everything becomes sold out.</p>
+        <p><strong>Sold out is permanent.</strong> Older plushies stay visible as an archive. If something returns, it comes back as a new season entry.</p>
+        <p><strong>Missed it.</strong> Click any sold out plush to view photos and details.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="season">
+        <h2 id="seasonTitle">Winter 2024 Drop</h2>
+        <div class="season-sub" id="seasonSub">Sold out. Browse the season.</div>
+      </div>
+
+      <div class="hero card" id="hero">
+        <div class="hint" aria-hidden="true">
+          <span>Click sides to skip</span>
+          <span>Click center for details</span>
+        </div>
+
+        <div class="hero-frame" id="heroFrame">
+          <div class="hero-media" id="heroMedia"></div>
+          <div class="hero-scrim"></div>
+
+          <div class="hero-overlay">
+            <div class="hero-text">
+              <h3 class="hero-title" id="heroName">Filler Plush</h3>
+              <div class="hero-sub" id="heroSeason">Winter 2024</div>
+            </div>
+            <div class="badge sold" id="heroStatus">Sold out</div>
+          </div>
+
+          <div class="hero-hit" aria-label="Featured plush navigation">
+            <button class="zone left" id="prevBtn" type="button" aria-label="Previous featured plush">prev</button>
+            <button class="zone center" id="openBtn" type="button" aria-label="Open featured plush details">open</button>
+            <button class="zone right" id="nextBtn" type="button" aria-label="Next featured plush">next</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" id="grid"></div>
+
+      <div class="footer-note">Template uses local filler images. Replace image paths in the data list.</div>
+    </section>
+  </main>
+
+  <script>
+    const season = {
+      title: "Winter 2024 Drop",
+      subtitle: "Sold out. Browse the season."
+    };
+
+    /*
+      Put your images in: /images/store/
+      Example files (replace with your real ones):
+      images/store/w24-platypus.jpg
+      images/store/w24-ghost.jpg
+      images/store/w24-frog.jpg
+      images/store/w24-bunny.jpg
+      images/store/w24-cat.jpg
+    */
+    const products = [
+      {
+        id: "w24-platypus-v1",
+        name: "Platypus V1",
+        season: "Winter 2024",
+        status: "sold",
+        image: "images/store/w24-platypus.jpg",
+        panFrom: "42% 50%",
+        panTo: "58% 50%",
+        heroPos: "50% 50%",
+        href: "products/w24-platypus-v1.html"
+      },
+      {
+        id: "w24-ghost-blob",
+        name: "Ghost Blob",
+        season: "Winter 2024",
+        status: "sold",
+        image: "images/store/w24-ghost.jpg",
+        panFrom: "40% 48%",
+        panTo: "60% 52%",
+        heroPos: "50% 50%",
+        href: "products/w24-ghost-blob.html"
+      },
+      {
+        id: "w24-frog-square",
+        name: "Frog Square",
+        season: "Winter 2024",
+        status: "sold",
+        image: "images/store/w24-frog.jpg",
+        panFrom: "45% 52%",
+        panTo: "55% 48%",
+        heroPos: "50% 50%",
+        href: "products/w24-frog-square.html"
+      },
+      {
+        id: "w24-bunny-moon",
+        name: "Bunny Moon",
+        season: "Winter 2024",
+        status: "sold",
+        image: "images/store/w24-bunny.jpg",
+        panFrom: "44% 50%",
+        panTo: "56% 50%",
+        heroPos: "50% 50%",
+        href: "products/w24-bunny-moon.html"
+      },
+      {
+        id: "w24-night-cat",
+        name: "Night Cat",
+        season: "Winter 2024",
+        status: "sold",
+        image: "images/store/w24-cat.jpg",
+        panFrom: "43% 49%",
+        panTo: "57% 51%",
+        heroPos: "50% 50%",
+        href: "products/w24-night-cat.html"
+      }
+    ];
+
+    const featuredCount = Math.min(5, products.length);
+    const featured = products.slice(0, featuredCount);
+
+    const els = {
+      infoBtn: document.getElementById("infoBtn"),
+      storeInfo: document.getElementById("storeInfo"),
+      seasonTitle: document.getElementById("seasonTitle"),
+      seasonSub: document.getElementById("seasonSub"),
+      hero: document.getElementById("hero"),
+      heroMedia: document.getElementById("heroMedia"),
+      heroFrame: document.getElementById("heroFrame"),
+      heroName: document.getElementById("heroName"),
+      heroSeason: document.getElementById("heroSeason"),
+      heroStatus: document.getElementById("heroStatus"),
+      prevBtn: document.getElementById("prevBtn"),
+      nextBtn: document.getElementById("nextBtn"),
+      openBtn: document.getElementById("openBtn"),
+      grid: document.getElementById("grid")
+    };
+
+    els.seasonTitle.textContent = season.title;
+    els.seasonSub.textContent = season.subtitle;
+
+    let index = 0;
+    let timer = null;
+    let paused = false;
+
+    function setHero(i, {fade=true} = {}){
+      const p = featured[i];
+      if (!p) return;
+
+      if (fade){
+        els.heroMedia.style.opacity = "0";
+        window.setTimeout(() => applyHero(p), 180);
+        window.setTimeout(() => els.heroMedia.style.opacity = "1", 260);
+      } else {
+        applyHero(p);
+      }
+    }
+
+    function applyHero(p){
+      els.heroFrame.style.setProperty("--heroImage", `url("${p.image}")`);
+      els.heroFrame.style.setProperty("--panFrom", p.panFrom || "42% 50%");
+      els.heroFrame.style.setProperty("--panTo", p.panTo || "58% 50%");
+      els.heroFrame.style.setProperty("--heroPos", p.heroPos || "50% 50%");
+
+      els.heroName.textContent = p.name;
+      els.heroSeason.textContent = p.season;
+
+      const sold = p.status !== "available";
+      els.heroStatus.textContent = sold ? "Sold out" : "Available";
+      els.heroStatus.className = "badge " + (sold ? "sold" : "available");
+      els.openBtn.dataset.href = p.href;
+    }
+
+    function next(){
+      index = (index + 1) % featured.length;
+      setHero(index);
+    }
+
+    function prev(){
+      index = (index - 1 + featured.length) % featured.length;
+      setHero(index);
+    }
+
+    function openCurrent(){
+      const href = els.openBtn.dataset.href;
+      if (href) window.location.href = href;
+    }
+
+    function start(){
+      stop();
+      timer = window.setInterval(() => {
+        if (!paused) next();
+      }, 6000);
+    }
+
+    function stop(){
+      if (timer) window.clearInterval(timer);
+      timer = null;
+    }
+
+    function pause(){
+      paused = true;
+    }
+
+    function resume(){
+      paused = false;
+    }
+
+    function renderGrid(){
+      els.grid.innerHTML = "";
+      products.forEach(p => {
+        const item = document.createElement("article");
+        item.className = "item " + (p.status !== "available" ? "sold" : "");
+        item.style.setProperty("--img", `url("${p.image}")`);
+
+        const thumb = document.createElement("div");
+        thumb.className = "thumb";
+
+        const scrim = document.createElement("div");
+        scrim.className = "scrim";
+
+        const meta = document.createElement("div");
+        meta.className = "meta";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = p.name;
+
+        const badge = document.createElement("div");
+        badge.className = "badge " + (p.status !== "available" ? "sold" : "available");
+        badge.textContent = (p.status !== "available") ? "Sold out" : "Available";
+
+        const hit = document.createElement("a");
+        hit.className = "hit";
+        hit.href = p.href;
+        hit.setAttribute("aria-label", `${p.name} details`);
+
+        meta.appendChild(h3);
+        meta.appendChild(badge);
+
+        item.appendChild(thumb);
+        item.appendChild(scrim);
+        item.appendChild(meta);
+        item.appendChild(hit);
+
+        els.grid.appendChild(item);
+      });
+    }
+
+    els.infoBtn.addEventListener("click", () => {
+      const open = els.storeInfo.classList.toggle("open");
+      els.infoBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    els.prevBtn.addEventListener("click", () => { pause(); prev(); });
+    els.nextBtn.addEventListener("click", () => { pause(); next(); });
+    els.openBtn.addEventListener("click", () => { pause(); openCurrent(); });
+
+    els.hero.addEventListener("mouseenter", pause);
+    els.hero.addEventListener("mouseleave", resume);
+
+    els.hero.addEventListener("touchstart", pause, {passive:true});
+    els.hero.addEventListener("touchend", resume, {passive:true});
+
+    renderGrid();
+    setHero(index, {fade:false});
+    start();
+  </script>
+</body>
+</html>
