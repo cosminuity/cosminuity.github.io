@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Copys | Platypys Store</title>
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#12141b;
+      --text:#e9e9ef;
+      --muted:#a8a8b6;
+      --line:rgba(255,255,255,.10);
+      --accent:#7c5cff;
+      --radius:16px;
+      --max:1080px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(124,92,255,0.18), transparent 60%),
+        radial-gradient(900px 700px at 85% 25%, rgba(255,255,255,0.07), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px 16px 56px}
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 12px;
+      font:inherit;
+      cursor:pointer;
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background:rgba(18,20,27,.72);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 1.35fr .95fr;
+      gap:14px;
+    }
+
+    .media{
+      position:relative;
+      min-height:520px;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:#000;
+      overflow:hidden;
+    }
+
+    .media::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: var(--img);
+      background-size: cover;
+      background-position: 50% 50%;
+      transform: scale(1.02);
+    }
+
+    .media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.05) 60%, rgba(0,0,0,0));
+    }
+
+    .panel{
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .title{
+      margin:0;
+      font-size:20px;
+      font-weight:750;
+    }
+
+    .sub{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.36);
+      font-size:12px;
+      color:rgba(233,233,239,.8);
+      width:max-content;
+    }
+
+    .desc p{
+      margin:10px 0;
+      font-size:14px;
+    }
+
+    .specs{
+      display:grid;
+      gap:10px;
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(0,0,0,.18);
+      font-size:13px;
+    }
+
+    .spec{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .spec span:first-child{color:var(--muted)}
+
+    @media (max-width:900px){
+      .layout{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <a class="btn" href="../store.html">Back</a>
+    </div>
+
+    <section class="layout">
+      <div class="media card" style="--img:url('../assets/images/store/w24-platypys-cos.jpg')" aria-label="Copys plush photo"></div>
+
+      <aside class="card panel">
+        <header>
+          <h1 class="title">Copys</h1>
+          <div class="sub">Winter 2024</div>
+          <div class="badge">Sold out</div>
+        </header>
+
+        <div class="desc">
+          <p>Original Cosminuity themed Platypys from the Winter 2024 drop.</p>
+          <p>One of the first character driven variants in the line.</p>
+        </div>
+
+        <div class="specs">
+          <div class="spec"><span>Status</span><span>Sold out</span></div>
+          <div class="spec"><span>Season</span><span>Winter 2024</span></div>
+          <div class="spec"><span>Variant</span><span>Copys</span></div>
+          <div class="spec"><span>Care</span><span>Spot clean only</span></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>
