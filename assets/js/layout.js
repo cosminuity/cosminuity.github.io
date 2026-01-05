@@ -16,9 +16,10 @@ function injectNav() {
       <div class="navInner">
         <a class="brand" href="index.html" data-page="home">Cosminuity</a>
         <div class="navlinks">
-          <a href="gallery.html" data-page="gallery">Gallery</a>
-          <a href="plushie.html" data-page="plushie">Plushies Sold</a>
-          <a href="about.html" data-page="about">About</a>
+            <a href="gallery.html" data-page="gallery">Gallery</a>
+            <a href="plushie.html" data-page="plushie">Plushies Sold</a>
+            <a href="store.html" data-page="store">Store</a>
+            <a href="about.html" data-page="about">About</a>
         </div>
       </div>
     </nav>
