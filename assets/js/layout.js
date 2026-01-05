@@ -11,7 +11,7 @@ async function injectNav() {
   const mount = document.getElementById("siteNav");
   if (!mount) return;
 
-  const html = await fetch("nav.html").then(r => r.text());
+  const html = await fetch("/nav.html").then(r => r.text());
   mount.innerHTML = html;
 
   const page = document.body.dataset.page || "";
