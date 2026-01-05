@@ -430,6 +430,10 @@ a:hover{opacity:.92}
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+
+    scroll-snap-type: x proximity;
+    padding-bottom: 2px;
+    mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
   }
 
   .navlinks::-webkit-scrollbar{
@@ -440,6 +444,14 @@ a:hover{opacity:.92}
     flex: 0 0 auto;
     font-size: 13px;
     padding: 8px 10px;
+    scroll-snap-align: start;
+  }
+
+  .navlinks::after{
+    content:"";
+    flex: 0 0 12px;
   }
 }
+
+
 
