@@ -1,5 +1,8 @@
 function esc(s) {
-  return String(s ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+  return String(s ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 function setActiveLink(root, page) {
@@ -7,17 +10,30 @@ function setActiveLink(root, page) {
   links.forEach(a => a.classList.toggle("active", a.getAttribute("data-page") === page));
 }
 
+function getBaseHref() {
+  const baseEl = document.querySelector("base[href]");
+  if (baseEl) return baseEl.getAttribute("href") || "";
+
+  const p = window.location.pathname;
+
+  // If we're inside /products/, go up one level.
+  if (p.includes("/products/")) return "../";
+
+  // Same folder as nav.html for root pages in the repo.
+  return "";
+}
+
 async function injectNav() {
   const mount = document.getElementById("siteNav");
   if (!mount) return;
 
-  const html = await fetch("/nav.html").then(r => r.text());
+  const base = getBaseHref();
+  const html = await fetch(`${base}nav.html`).then(r => r.text());
   mount.innerHTML = html;
 
   const page = document.body.dataset.page || "";
   setActiveLink(mount, page);
 }
-
 
 function injectHero() {
   const mount = document.getElementById("siteHero");
@@ -43,4 +59,3 @@ function setYear() {
 injectNav();
 injectHero();
 setYear();
-
