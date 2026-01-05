@@ -407,6 +407,20 @@
       .reveal{opacity:1;transform:none}
       .homeHero::after, .card::after{display:none}
     }
+    @media (max-width: 900px){
+      body[data-page="home"] .heroPoster{
+        height:78vh;
+        min-height:420px;
+      }
+    }
+    
+    @media (max-width: 720px){
+      body[data-page="home"] .heroPoster{
+        height:auto;
+        min-height:520px;
+        padding:16px 0 22px;
+      }
+    }
   </style>
 </head>
 
