@@ -225,32 +225,73 @@ a:hover{opacity:.92}
   bottom:0;
   z-index:5;
   padding:10px 12px;
-  overflow:hidden;
   pointer-events:auto;
 }
 
-/* feathered blur */
-.sold-card--bg .sold-panel::before{
-  content:"";
-  position:absolute;
-  inset:0;
+/* details wrapper */
+.sold-details{
+  margin:0;
+}
+
+/* summary becomes minimal UI */
+.sold-summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:fit-content;
+  padding:0;
+  color:var(--muted);
+}
+
+.sold-summary::-webkit-details-marker{display:none}
+
+/* plush name pill */
+.sold-pill{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(10,10,15,.55);
   backdrop-filter:blur(10px);
-  background:linear-gradient(
-    to top,
-    rgba(10,10,15,.88) 0%,
-    rgba(10,10,15,.62) 55%,
-    rgba(10,10,15,0) 100%
-  );
-  z-index:0;
-  pointer-events:none;
+  color:var(--text);
+  font-weight:600;
+  font-size:14px;
+  line-height:1;
 }
 
-.sold-card--bg .sold-panel > *{
-  position:relative;
-  z-index:1;
+/* desktop hint text */
+.sold-hint{
+  font-size:12px;
+  color:var(--muted);
+  opacity:.9;
 }
 
-/* rows */
+/* drawer */
+.sold-drawer{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(10,10,15,.62);
+  backdrop-filter:blur(10px);
+
+  opacity:0;
+  transform:translateY(6px);
+  max-height:0;
+  overflow:hidden;
+  transition:opacity .18s ease, transform .18s ease, max-height .18s ease;
+}
+
+.sold-details[open] .sold-drawer{
+  opacity:1;
+  transform:translateY(0);
+  max-height:220px;
+}
+
+/* rows inside drawer */
 .sold-row{
   display:grid;
   grid-template-columns:86px 1fr;
@@ -260,7 +301,7 @@ a:hover{opacity:.92}
   padding:0;
 }
 
-.sold-row + .sold-row{margin-top:6px}
+.sold-row + .sold-row{margin-top:8px}
 
 .sold-label{
   font-size:12px;
@@ -275,47 +316,17 @@ a:hover{opacity:.92}
   text-overflow:ellipsis;
 }
 
-/* details toggle */
-.sold-details{margin-top:8px}
-
-.sold-summary{
-  font-size:12px;
-  color:var(--muted);
-  cursor:pointer;
-  list-style:none;
-  padding:4px 0;
-}
-
-.sold-summary::-webkit-details-marker{display:none}
-
-/* message default (hidden without resizing layout) */
-.sold-details .sold-message{
-  opacity:0;
-  transform:translateY(6px);
-  transition:opacity .18s ease, transform .18s ease;
-  max-height:none;
-  overflow:hidden;
-}
-
-/* show message on hover OR when details is actually open */
-.sold-card:hover .sold-details .sold-message,
-.sold-details[open] .sold-message{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* clamp message lines by default */
-.sold-details .sold-message .sold-value{
+/* message wraps */
+.sold-messageText{
   white-space:normal;
   display:-webkit-box;
-  -webkit-line-clamp:3;
+  -webkit-line-clamp:4;
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
 
-/* expand clamp when opened */
-.sold-details[open] .sold-message .sold-value{
-  -webkit-line-clamp:10;
+.sold-details[open] .sold-messageText{
+  -webkit-line-clamp:12;
 }
 
 /* mobile */
@@ -325,20 +336,17 @@ a:hover{opacity:.92}
   .sold-card--bg .sold-panel{padding:10px}
 }
 
-/* desktop only: prevent summary stealing hover focus */
-@media (hover:hover){
-  .sold-summary{pointer-events:none}
-}
-
 /* mobile only: show tap hint */
 @media (hover:none) and (pointer:coarse){
+  .sold-hint{display:none}
+
   .sold-summary{
     position:relative;
     padding-right:86px;
   }
 
   .sold-summary::after{
-    content:"Tap to expand";
+    content:"Tap for details";
     position:absolute;
     right:0;
     top:0;
@@ -362,4 +370,9 @@ a:hover{opacity:.92}
   .sold-details[open] .sold-summary::before{
     content:"▴";
   }
+}
+
+/* desktop hint copy */
+@media (hover:hover){
+  .sold-hint{display:inline}
 }
