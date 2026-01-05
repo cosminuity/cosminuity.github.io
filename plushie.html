@@ -6,15 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Plushies Archive</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- Base styles -->
   <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- Global theme overrides -->
   <link rel="stylesheet" href="assets/css/theme.css" />
 </head>
 
@@ -88,12 +84,18 @@
                   <div class="sold-value">${p.buyer || ""}</div>
                 </div>
 
-                <div class="sold-row">
-                  <div class="sold-label">Message</div>
-                  <div class="sold-value sold-messageText">
-                    ${p.message ? p.message : "No message"}
-                  </div>
-                </div>
+                ${
+                  (p.message && p.message.trim())
+                    ? `
+                      <div class="sold-row">
+                        <div class="sold-label">Message</div>
+                        <div class="sold-value sold-messageText">
+                          ${p.message}
+                        </div>
+                      </div>
+                    `
+                    : ``
+                }
               </div>
             </details>
           </div>
