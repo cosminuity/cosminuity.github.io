@@ -183,25 +183,13 @@ a:hover{opacity:.92}
   grid-auto-flow:dense;
 }
 
-.sold-card{
-  grid-column:span 1;
-}
-
-.sold-card.is-wide{
-  grid-column:span 2;
-}
-
-.sold-card.is-tall{
-  grid-row:span 2;
-}
+.sold-card{grid-column:span 1}
+.sold-card.is-wide{grid-column:span 2}
+.sold-card.is-tall{grid-row:span 2}
 
 @media (max-width:900px){
-  .sold-card.is-wide{
-    grid-column:span 1;
-  }
+  .sold-card.is-wide{grid-column:span 1}
 }
-
-
 
 /* Card */
 .sold-card--bg{
@@ -229,7 +217,7 @@ a:hover{opacity:.92}
   z-index:0;
 }
 
-/* panel sits above the hit link and receives clicks */
+/* panel */
 .sold-card--bg .sold-panel{
   position:absolute;
   left:0;
@@ -288,29 +276,35 @@ a:hover{opacity:.92}
 }
 
 /* details toggle */
-.sold-details{
-  margin-top:8px;
-}
+.sold-details{margin-top:8px}
 
 .sold-summary{
   font-size:12px;
   color:var(--muted);
   cursor:pointer;
   list-style:none;
+  padding:4px 0;
 }
 
-.sold-summary::-webkit-details-marker{
-  display:none;
-}
+.sold-summary::-webkit-details-marker{display:none}
 
-/* message closed */
+/* message default (hidden without resizing layout) */
 .sold-details .sold-message{
-  max-height:0;
   opacity:0;
+  transform:translateY(6px);
+  transition:opacity .18s ease, transform .18s ease;
+  max-height:none;
   overflow:hidden;
-  transition:max-height .18s ease, opacity .18s ease;
 }
 
+/* show message on hover OR when details is actually open */
+.sold-card:hover .sold-details .sold-message,
+.sold-details[open] .sold-message{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* clamp message lines by default */
 .sold-details .sold-message .sold-value{
   white-space:normal;
   display:-webkit-box;
@@ -319,31 +313,14 @@ a:hover{opacity:.92}
   overflow:hidden;
 }
 
-/* message open on tap */
-.sold-details[open] .sold-message{
-  max-height:140px;
-  opacity:1;
-}
-
-/* optional: make some cards wider */
-.sold-lg{grid-column:span 2}
-@media (max-width: 980px){
-  .sold-lg{grid-column:auto}
+/* expand clamp when opened */
+.sold-details[open] .sold-message .sold-value{
+  -webkit-line-clamp:10;
 }
 
 /* mobile */
-@media (max-width: 600px){
+@media (max-width:600px){
   .sold-card--bg{aspect-ratio:4/3}
   .sold-row{grid-template-columns:78px 1fr}
   .sold-card--bg .sold-panel{padding:10px}
-}
-
-/* hover preview even when details is closed */
-.sold-card--bg:hover .sold-details .sold-message{
-  max-height:140px;
-  opacity:1;
-}
-
-.sold-summary{
-  padding:4px 0;
 }
