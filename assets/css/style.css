@@ -575,3 +575,68 @@ a:hover{opacity:.92}
     grid-template-columns:1fr 1fr;
   }
 }
+
+@media (max-width: 520px){
+  .heroPoster{
+    height:auto;
+    min-height:auto;
+  }
+
+  .posterOverlay{
+    padding:14px 0 18px;
+    align-items:flex-start;
+  }
+
+  /* targets the glass hero box on home */
+  .homeHero,
+  .heroCard{
+    padding:14px;
+    border-radius:18px;
+    max-width:min(92vw, 520px);
+  }
+
+  /* switch to single column inside the hero box */
+  .homeHeroGrid,
+  .heroGrid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    align-items:start;
+  }
+
+  /* title sizing */
+  .homeHeroTitle,
+  .heroTitle{
+    font-size:40px;
+    line-height:1.05;
+    letter-spacing:.02em;
+    margin:0;
+  }
+
+  /* body copy sizing */
+  .homeHeroCopy,
+  .heroCopy{
+    font-size:14px;
+    line-height:1.45;
+    max-width:36ch;
+  }
+
+  /* buttons become stacked and full width */
+  .homeHeroActions,
+  .heroActions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    width:100%;
+    margin-top:6px;
+  }
+
+  .homeHeroActions a,
+  .homeHeroActions .btn,
+  .heroActions a,
+  .heroActions .btn{
+    width:100%;
+    padding:12px 14px;
+    border-radius:14px;
+  }
+}
