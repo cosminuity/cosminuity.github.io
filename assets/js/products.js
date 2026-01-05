@@ -1,7 +1,7 @@
 const products = [
   {
     id: "w24-platypys-banana",
-    name: "Banana Platypys",
+    name: "Bananapys",
     season: "Winter 2024",
     status: "sold",
     image: "assets/images/store/w24-platypys-banana.jpg",
@@ -10,7 +10,7 @@ const products = [
   },
   {
     id: "w24-platypys-cos",
-    name: "Cos Platypys",
+    name: "Copys",
     season: "Winter 2024",
     status: "sold",
     image: "assets/images/store/w24-platypys-cos.jpg",
