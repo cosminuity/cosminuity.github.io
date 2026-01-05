@@ -198,6 +198,11 @@
       transform: translateY(0);
     }
 
+    /* Hotfix: add consistent space between hero block and accordion stack */
+    .about-hero + section.stack{
+      margin-top: 18px;
+    }
+
     @media (prefers-reduced-motion: reduce){
       .about-hero::before{ animation: none; }
       .chip, .links a, .reveal{ transition: none; }
