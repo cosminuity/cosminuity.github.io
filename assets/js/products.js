@@ -17,5 +17,6 @@ const products = [
     heroPos: "50% 50%",
     href: "products/w24-platypys-cos.html"
   }
-  // more products
 ]
+
+window.products = products
