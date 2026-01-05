@@ -15,6 +15,88 @@
 
   <style>
     .homeWrap{padding:18px 0 44px}
+
+    .heroPoster{
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid var(--line);
+      min-height: 46vh;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(1100px 700px at 15% 20%, rgba(124,92,255,.18), transparent 60%),
+        radial-gradient(900px 650px at 85% 30%, rgba(255,255,255,.06), transparent 55%),
+        var(--bg);
+    }
+
+    .heroPoster::before{
+      content:"";
+      position:absolute;
+      inset:-12%;
+      background:
+        conic-gradient(from 180deg at 50% 50%,
+          rgba(124,92,255,.0),
+          rgba(124,92,255,.35),
+          rgba(255,255,255,.12),
+          rgba(124,92,255,.0)
+        );
+      filter: blur(30px);
+      opacity:.55;
+      animation: spin 16s linear infinite;
+      transform: translateZ(0);
+      pointer-events:none;
+    }
+
+    .heroPoster::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(700px 360px at 50% 45%, rgba(0,0,0,.15), rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+
+    @keyframes spin{
+      0%{transform:rotate(0deg)}
+      100%{transform:rotate(360deg)}
+    }
+
+    .posterOverlay{
+      position:relative;
+      z-index:2;
+      width:min(1080px, calc(100% - 32px));
+      padding: 26px 18px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:var(--radius);
+      background: rgba(18,20,27,.48);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+    }
+
+    .posterTitle{
+      margin:0;
+      font-family:"Space Grotesk", ui-sans-serif, system-ui;
+      font-weight:700;
+      letter-spacing:.08em;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.05;
+    }
+
+    .posterKicker{
+      margin-top: 10px;
+      color: rgba(233,233,239,.86);
+      max-width: 70ch;
+      line-height: 1.5;
+    }
+
+    .spark{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.9;
+      mix-blend-mode: screen;
+      filter: blur(.2px);
+    }
+
     .homeHero{
       display:grid;
       gap:14px;
@@ -51,11 +133,23 @@
       display:inline-flex;
       align-items:center;
       gap:8px;
+      transform: translateZ(0);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.04);
     }
     .btn.primary{
       border-color:rgba(124,92,255,.55);
       background:rgba(124,92,255,.16);
     }
+    .btn.primary:hover{
+      border-color:rgba(124,92,255,.70);
+      background:rgba(124,92,255,.22);
+    }
+
     .grid{
       display:grid;
       grid-template-columns:1.2fr .8fr;
@@ -78,12 +172,14 @@
       font-size:16px;
     }
     .cardMuted{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+
     .previewGrid{
       display:grid;
       grid-template-columns:repeat(2, 1fr);
       gap:10px;
       margin-top:12px;
     }
+
     .preview{
       border:1px solid rgba(255,255,255,.10);
       border-radius:14px;
@@ -91,24 +187,39 @@
       overflow:hidden;
       position:relative;
       aspect-ratio: 1 / 1;
+      transform: translateZ(0);
+      transition: transform .22s ease, border-color .22s ease;
     }
+
     .preview::before{
       content:"";
       position:absolute;
       inset:0;
       background-image: var(--img);
       background-size: cover;
-      background-position: 50% 50%;
-      transform: scale(1.02);
-      filter:saturate(1.02) contrast(1.02);
+      background-position: var(--pos, 50% 50%);
+      transform: scale(1.05);
+      filter:saturate(1.04) contrast(1.02);
+      transition: transform .6s ease;
     }
+
     .preview::after{
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0) 55%);
+      background:linear-gradient(to top, rgba(0,0,0,.60), rgba(0,0,0,0) 55%);
       pointer-events:none;
     }
+
+    .preview:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .preview:hover::before{
+      transform: scale(1.12);
+    }
+
     .previewLabel{
       position:absolute;
       left:10px;
@@ -124,7 +235,9 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      backdrop-filter: blur(6px);
     }
+
     .list{
       display:grid;
       gap:10px;
@@ -143,9 +256,28 @@
     .row strong{font-size:13px}
     .row span{color:var(--muted);font-size:12px}
     .smallLink{font-size:13px;color:var(--text);text-decoration:none}
+
+    .reveal{
+      opacity:0;
+      transform: translateY(10px);
+      transition: opacity .5s ease, transform .5s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.in{
+      opacity:1;
+      transform: translateY(0);
+    }
+
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
       .homeTitle{font-size:24px}
+      .heroPoster{min-height: 42vh}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .heroPoster::before{animation:none}
+      .btn, .preview, .reveal{transition:none}
+      .reveal{opacity:1;transform:none}
     }
   </style>
 </head>
@@ -153,17 +285,27 @@
 <body data-page="home">
   <div id="siteNav"></div>
 
-  <header class="heroPoster">
-    <div class="posterOverlay">
+  <header class="heroPoster" id="heroPoster">
+    <canvas class="spark" id="sparkCanvas" aria-hidden="true"></canvas>
+
+    <div class="posterOverlay reveal">
       <h1 class="posterTitle">COSMINUITY</h1>
+      <p class="posterKicker">
+        Animations, art, plush drops, and ideas. A small run character project, plus the home of the Platypys.
+      </p>
+      <div class="homeCtas" style="margin-top:14px">
+        <a class="btn primary" href="archive.html">View the Plush Archive</a>
+        <a class="btn" href="store.html">Visit the Store</a>
+      </div>
     </div>
   </header>
 
   <main class="container homeWrap">
-    <section class="homeHero">
+    <section class="homeHero reveal">
       <h2 class="homeTitle">Animations, Art, Plush drops, and Ideas.</h2>
       <p class="homeSub">
-        Cosminuity is a small run character project. Not only is it a personal archive, but is also the home of the Platypys. While things are moving slower with a nursing degree load on my schedule, things will still continue to grow.
+        Cosminuity is a small run character project. Not only is it a personal archive, but is also the home of the Platypys.
+        While things are moving slower with a nursing degree load on my schedule, things will still continue to grow.
       </p>
       <div class="homeCtas">
         <a class="btn primary" href="archive.html">View the Plush Archive</a>
@@ -172,7 +314,7 @@
     </section>
 
     <section class="grid" aria-label="Homepage highlights">
-      <div class="card">
+      <div class="card reveal">
         <div class="cardPad">
           <h3 class="cardTitle">Archive preview</h3>
           <p class="cardMuted">A quick look at recent releases. Click any tile to jump into the archive.</p>
@@ -188,7 +330,7 @@
         </div>
       </div>
 
-      <aside class="card">
+      <aside class="card reveal">
         <div class="cardPad">
           <h3 class="cardTitle">Start here</h3>
           <p class="cardMuted">If you only click two things, make it these.</p>
@@ -213,5 +355,98 @@
   </div>
 
   <script src="assets/js/layout.js"></script>
+
+  <script>
+    (function () {
+      const hero = document.getElementById("heroPoster");
+      const canvas = document.getElementById("sparkCanvas");
+      const ctx = canvas.getContext("2d", { alpha: true });
+
+      let w = 0, h = 0, dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      let particles = [];
+      let raf = 0;
+
+      function resize() {
+        const r = hero.getBoundingClientRect();
+        w = Math.floor(r.width);
+        h = Math.floor(r.height);
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function rand(min, max) { return min + Math.random() * (max - min); }
+
+      function makeParticles() {
+        const count = Math.round((w * h) / 28000);
+        particles = Array.from({ length: count }, () => ({
+          x: rand(0, w),
+          y: rand(0, h),
+          r: rand(0.8, 2.2),
+          vx: rand(-0.08, 0.08),
+          vy: rand(-0.14, -0.02),
+          a: rand(0.10, 0.30),
+          tw: rand(0.004, 0.012),
+          t: rand(0, 1000)
+        }));
+      }
+
+      function step() {
+        ctx.clearRect(0, 0, w, h);
+
+        for (const p of particles) {
+          p.t += 1;
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.y < -10) { p.y = h + 10; p.x = rand(0, w); }
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+
+          const pulse = 0.6 + 0.4 * Math.sin(p.t * p.tw);
+          const alpha = p.a * pulse;
+
+          ctx.globalAlpha = alpha;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255,255,255,1)";
+          ctx.fill();
+        }
+
+        ctx.globalAlpha = 1;
+        raf = requestAnimationFrame(step);
+      }
+
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduce) {
+        resize();
+        makeParticles();
+        step();
+        window.addEventListener("resize", () => {
+          cancelAnimationFrame(raf);
+          resize();
+          makeParticles();
+          step();
+        }, { passive: true });
+      }
+
+      const items = Array.from(document.querySelectorAll(".reveal"));
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          });
+        }, { threshold: 0.12 });
+
+        items.forEach(el => io.observe(el));
+      } else {
+        items.forEach(el => el.classList.add("in"));
+      }
+    })();
+  </script>
 </body>
 </html>
