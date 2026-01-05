@@ -410,6 +410,7 @@ a:hover{opacity:.92}
     padding:10px 12px;
     gap:12px;
     min-width:0;
+    justify-content:flex-start;
   }
 
   .brand{
@@ -423,10 +424,7 @@ a:hover{opacity:.92}
     gap:8px;
     flex:1 1 auto;
     min-width:0;
-    margin-left:0;
     justify-content:flex-start;
-    cursor: grab;
-
 
     width:100%;
     max-width:calc(100vw - 140px);
@@ -437,12 +435,12 @@ a:hover{opacity:.92}
 
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
-
     touch-action:pan-x;
 
     scroll-snap-type:x proximity;
     padding-bottom:2px;
-    mask-image:linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+
+    position:relative;
   }
 
   .navlinks::-webkit-scrollbar{
@@ -456,8 +454,25 @@ a:hover{opacity:.92}
     scroll-snap-align:start;
   }
 
+  /* fade hint without breaking Chrome Android */
+  .navlinks::before,
   .navlinks::after{
     content:"";
-    flex:0 0 12px;
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:14px;
+    pointer-events:none;
+  }
+
+  .navlinks::before{
+    left:0;
+    background:linear-gradient(to right, rgba(10,10,15,.85), rgba(10,10,15,0));
+  }
+
+  .navlinks::after{
+    right:0;
+    background:linear-gradient(to left, rgba(10,10,15,.85), rgba(10,10,15,0));
   }
 }
+
