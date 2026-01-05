@@ -640,3 +640,53 @@ a:hover{opacity:.92}
     border-radius:14px;
   }
 }
+
+@media (max-width: 720px){
+  .heroPoster{
+    height:auto !important;
+    min-height:0 !important;
+  }
+
+  .posterOverlay{
+    align-items:flex-start !important;
+    padding:14px 0 18px !important;
+  }
+
+  .heroPoster .posterOverlay .homeHero{
+    padding:14px !important;
+    border-radius:18px !important;
+    max-width:min(92vw, 560px) !important;
+    margin:0 12px !important;
+  }
+
+  .heroPoster .posterOverlay .homeHero{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+
+  .heroPoster .posterOverlay .homeHero h1,
+  .heroPoster .posterOverlay .homeHero .posterTitle{
+    font-size:40px !important;
+    line-height:1.05 !important;
+    letter-spacing:.02em !important;
+    margin:0 !important;
+  }
+
+  .heroPoster .posterOverlay .homeHero p{
+    font-size:14px !important;
+    line-height:1.45 !important;
+    max-width:36ch !important;
+  }
+
+  .heroPoster .posterOverlay .homeHero a{
+    width:100% !important;
+  }
+
+  .heroPoster .posterOverlay .homeHero a.btn{
+    display:block !important;
+    width:100% !important;
+    padding:12px 14px !important;
+    border-radius:14px !important;
+  }
+}
