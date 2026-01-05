@@ -7,25 +7,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusSel = document.getElementById("status")
   const sortSel = document.getElementById("sort")
 
-  if (!grid || !q || !seasonSel || !statusSel || !sortSel) {
-    console.error("Archive missing required elements", { grid, q, seasonSel, statusSel, sortSel })
+  if (!grid) {
+    console.error("Grid not found")
     return
   }
 
-  function uniqSeasons(items) {
-    return Array.from(new Set(items.map(p => p.season).filter(Boolean))).sort()
+  function uniqSeasons(list) {
+    return Array.from(new Set(list.map(p => p.season).filter(Boolean))).sort()
   }
 
   function seasonScore(season) {
     const m = String(season || "").match(/(spring|summer|fall|winter)\s+(\d{4})/i)
     if (!m) return 0
     const year = Number(m[2])
-    const order = { spring: 1, summer: 2, fall: 3, winter: 4 }[m[1].toLowerCase()] || 0
+    const order = { spring:1, summer:2, fall:3, winter:4 }[m[1].toLowerCase()] || 0
     return year * 10 + order
   }
 
   function buildSeasonOptions() {
-    uniqSeasons(products).forEach(s => {
+    uniqSeasons(items).forEach(s => {
       const o = document.createElement("option")
       o.value = s
       o.textContent = s
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function apply() {
-    let items = products.slice()
+    let list = items.slice()
 
     const query = q.value.trim().toLowerCase()
     const season = seasonSel.value
@@ -57,26 +57,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const sort = sortSel.value
 
     if (query) {
-      items = items.filter(p => {
-        const hay = `${p.name || ""} ${p.id || ""} ${p.season || ""} ${p.status || ""}`.toLowerCase()
-        return hay.includes(query)
-      })
+      list = list.filter(p =>
+        `${p.name||""} ${p.id||""} ${p.season||""} ${p.status||""}`
+          .toLowerCase()
+          .includes(query)
+      )
     }
 
-    if (season) items = items.filter(p => p.season === season)
-    if (status) items = items.filter(p => p.status === status)
+    if (season) list = list.filter(p => p.season === season)
+    if (status) list = list.filter(p => p.status === status)
 
     if (sort === "name") {
-      items.sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")))
+      list.sort((a,b) => (a.name||"").localeCompare(b.name||""))
     } else {
-      items.sort((a, b) => seasonScore(a.season) - seasonScore(b.season))
-      if (sort === "new") items.reverse()
+      list.sort((a,b) => seasonScore(a.season) - seasonScore(b.season))
+      if (sort === "new") list.reverse()
     }
 
     grid.innerHTML = ""
-    items.forEach(p => grid.appendChild(card(p)))
-
-    console.log("Archive rendered", items.length)
+    list.forEach(p => grid.appendChild(card(p)))
   }
 
   buildSeasonOptions()
