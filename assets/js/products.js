@@ -13,7 +13,7 @@ const products = [
     name: "Cos Platypys",
     season: "Winter 2024",
     status: "sold",
-    image: "assets/images/store/w24-platypys-platypys-cos.jpg",
+    image: "assets/images/store/w24-platypys-cos.jpg",
     heroPos: "50% 50%",
     href: "products/w24-platypys-cos.html"
   }
